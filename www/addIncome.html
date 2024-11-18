@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expense Category Selector</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+   
+<link rel="stylesheet" href="css/addIncome.css">
+
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <a href="record.html"><button>&lt;</button></a>
+        <div class="category-tabs">
+            <a style="text-decoration:none" href="addExpenses.html"><button>Expenses</button></a>
+            <button >Income</button>
+            <button>Transfer</button>
+        </div>
+    </div>
+    
+    <div class="categories">
+        <div class="category-item">
+            <button onclick="selectCategory('Cash', 'image/incomeCash.png')">
+                <img src="image/incomeCash.png" alt="cash">
+                <span>Cash</span>
+            </button>
+        </div>
+        <div class="category-item">
+            <button onclick="selectCategory('Bank', 'image/incomeBank.png')">
+                <img src="image/incomeBank.png" alt="bank">
+                <span>Bank</span>
+            </button>
+        </div>
+        <div class="category-item">
+            <button onclick="selectCategory('Bonus', 'image/incomeBonus.png')">
+                <img src="image/incomeBonus.png" alt="bonus">
+                <span>Bonus</span>
+            </button>
+        </div>
+        <div class="category-item">
+            <button onclick="selectCategory('Deposit', 'image/incomeDeposit.png')">
+                <img src="image/incomeDeposit.png" alt="deposit">
+                <span>Deposit</span>
+            </button>
+        </div>
+        <div class="category-item">
+            <button onclick="selectCategory('Interest', 'image/incomeInterest.png')">
+                <img src="image/incomeInterest.png" alt="interest">
+                <span>Interest</span>
+            </button>
+        </div>
+        <div class="category-item">
+            <button onclick="selectCategory('Salary', 'image/incomeSalary.png')">
+                <img src="image/incomeSalary.png" alt="salary">
+                <span>Salary</span>
+            </button>
+        </div>
+        <div class="category-item">
+            <button onclick="selectCategory('Other', 'image/other.png')">
+                <img src="image/other.png" alt="otherIncome">
+                <span>Other</span>
+            </button>
+        </div>
+        <div class="category-item">
+            <button onclick="selectCategory('addEventListener', 'image/addCategory.png')">
+                <img src="image/addCategory.png" alt="New">
+                <span>New</span>
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<div class="footer">
+    <div class="input-fields">
+        <input type="text" id="amountIncome" placeholder="Amount">
+        <input type="text" id="remarkIncome" placeholder="Remark">
+    </div><br>
+    <div class="calculator">
+        <button onclick="pressNumber(1)">1</button>
+        <button onclick="pressNumber(2)">2</button>
+        <button onclick="pressNumber(3)">3</button>
+        <button onclick="setOperation('+')">+</button>
+        <button onclick="pressNumber(4)">4</button>
+        <button onclick="pressNumber(5)">5</button>
+        <button onclick="pressNumber(6)">6</button>
+        <button onclick="setOperation('-')">-</button>
+        <button onclick="pressNumber(7)">7</button>
+        <button onclick="pressNumber(8)">8</button>
+        <button onclick="pressNumber(9)">9</button>
+        <button onclick="deleteLast()">←</button>
+        
+        <button onclick="pressNumber(0)">0</button>
+        <button onclick="addDecimal()">.</button>
+        <button onclick="calculate()">=</button>
+        <button id="save-btn" class="btn btn-primary"  onclick="saveData()"><img src="image/excited.png" width="30px" height="20px" style="float:initial; margin-right: 2px;">Save</button>
+    </div>
+</div>
+
+<script>
+    let selectedCategory = null;
+    let operation = null;
+    let amountField = "";
+    let currentOperationValue = 0;
+
+    function selectCategory(name, icon) {
+        selectedCategory = { name, icon };
+        // Highlight selected category
+        const buttons = document.querySelectorAll('.category-item button');
+        buttons.forEach(btn => btn.classList.remove('selected')); // Remove previous selection
+        event.target.classList.add('selected'); // Highlight current selection
+    }
+
+    function pressNumber(num) {
+        amountField += num;
+        document.getElementById('amountIncome').value = amountField;
+    }
+
+    function addDecimal() {
+        if (!amountField.includes(".")) {
+            amountField += ".";
+            document.getElementById('amountIncome').value = amountField;
+        }
+    }
+
+    function deleteLast() {
+        amountField = amountField.slice(0, -1);
+        document.getElementById('amountIncome').value = amountField;
+    }
+
+    function setOperation(op) {
+        operation = op;
+        if (amountField) {
+            currentOperationValue = parseFloat(amountField);
+            amountField = "";
+            document.getElementById('amountIncome').value = "";
+        }
+    }
+
+    function calculate() {
+        if (operation && amountField) {
+            let newValue = parseFloat(amountField);
+            if (operation == "+") {
+                currentOperationValue += newValue;
+            } else if (operation == "-") {
+                currentOperationValue -= newValue;
+            }
+            amountField = currentOperationValue.toString();
+            operation = null;
+            document.getElementById('amountIncome').value = amountField;
+        }
+    }
+
+    function saveData() {
+    if (!selectedCategory) {
+        alert("Please select a category!");
+        return;
+    }
+
+    const amountIncome = parseFloat(document.getElementById('amountIncome').value);
+    const remarkIncome = document.getElementById('remarkIncome').value;
+
+    if (isNaN(amountIncome) || amountIncome <= 0) {
+        alert("Please enter a valid amount!");
+        return;
+    }
+
+    const IncomeRecord = {
+        category: selectedCategory.name,
+        icon: selectedCategory.icon,
+        amountIncome,
+        remarkIncome,
+        date: new Date().toLocaleString(),
+    };
+
+    let records = JSON.parse(localStorage.getItem("incomes")) || [];
+    records.push(IncomeRecord);
+    localStorage.setItem("incomes", JSON.stringify(records));
+
+    alert("Income Record saved!");
+    resetFields();
+
+   
+
+    window.location.href = 'record.html'; // Optionally redirect after saving
+}
+
+    function resetFields() {
+        selectedCategory = null;
+        amountField = "";
+        currentOperationValue = 0;
+        operation = null;
+        document.getElementById('amountIncome').value = "";
+        document.getElementById('remarkIncome').value = "";
+    }
+</script>
+
+</body>
+</html>
+
+
+
+

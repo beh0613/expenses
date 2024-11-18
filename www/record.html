@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expenses Tracker</title>
+<style>
+ /* Body and Global Settings */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f9fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.subheader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 12px 20px;
+    background-color: #fffbf2;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+
+}
+.header div {
+    padding: 12px 20px;
+    background-color: #fffbf2;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+}
+
+
+.header div.setup {
+    background-color: #e0f7fa;
+}
+
+.header .username {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.balance {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    font-size: 18px;
+}
+
+.balance div {
+    text-align: center;
+    padding: 15px;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Record Section Styling */
+.records {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.records h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Updated Record Item Styling */
+.record-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    position: relative;
+    background-color: #fafafa;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.record-item:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.record-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.record-day {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.time {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin-bottom: 10px; /* Added margin for separation */
+}
+
+.details img {
+    width: 50px;  /* Increased icon size */
+    height: 50px;  /* Increased icon size */
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.category {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.amount {
+    font-size: 16px;
+    font-weight: bold;
+    margin-top: 5px;
+    color: #333;
+    width: 20%;
+    text-align: right;
+}
+
+.amount.red {
+    color: #e74c3c; /* Red for expense */
+}
+
+.amount.green {
+    color: #27ae60; /* Green for income */
+}
+
+.remark {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.edit-btn, .delete-btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.edit-btn {
+    background-color: #f39c12;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #e67e22;
+}
+
+.delete-btn {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Footer Styling */
+.footer {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 15px 0;
+    border-top: 1px solid #ddd;
+    border-radius: 30px;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.footer img {
+    width: 35px;
+    height: 35px;
+}
+
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="username" id="usernameDisplay">Hello, User</div>
+            <br>
+            
+        </div>
+        
+        <div class="subheader">
+            <div>All Ledgers</div>
+            <div class="setup">Setup Budget</div>
+        </div>
+        <div class="balance">
+            <div class="totalExpenses">
+                <p>Expenses</p>
+                <p id="totalExpenses" style="color: red;">0</p>
+            </div>
+            <div class="totalIncome">
+                <p>Income</p>
+                <p id="totalIncome" style="color: green;">0</p>
+            </div>
+        </div>
+        
+        <div class="records">
+            <h3>RECORDS</h3>
+            <div id="recordsContainer">
+                <!-- Records will be dynamically added here -->
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <a href="addExpenses.html"><img src="image/iconEdit.png" alt="Add Expense"></a>
+    </div>
+    <script>
+        window.onload = function () {
+            displayRecords();
+            calculateTotals();
+            displayUsername();
+        };
+    
+        function displayUsername() {
+            const username = localStorage.getItem('currentUser');
+            if (username) {
+                document.getElementById('usernameDisplay').textContent = `Hello, ${username}`;
+            }
+        }
+        function displayRecords() {
+    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    const incomes = JSON.parse(localStorage.getItem('incomes')) || [];
+    const recordsContainer = document.getElementById('recordsContainer');
+    recordsContainer.innerHTML = ""; // Clear previous records
+
+    const allRecords = [
+        ...expenses.map((rec, index) => ({ ...rec, isExpense: true, index })),
+        ...incomes.map((rec, index) => ({ ...rec, isExpense: false, index })),
+    ];
+
+    allRecords.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by latest date
+
+    let previousDate = null;
+
+    allRecords.forEach((record) => {
+        const recordDiv = document.createElement('div');
+        recordDiv.className = 'record-item';
+
+        const date = new Date(record.date);
+        const fullDate = date.toLocaleDateString();
+        const time = date.toLocaleTimeString();
+
+        if (previousDate !== fullDate) {
+            previousDate = fullDate;
+            const dateDiv = document.createElement('div');
+            dateDiv.className = 'record-day';
+            dateDiv.textContent = fullDate;
+            recordsContainer.appendChild(dateDiv);
+        }
+
+        const amount = record.isExpense
+            ? `-${parseFloat(record.amount || 0).toFixed(2)}`
+            : `+${parseFloat(record.amountIncome || 0).toFixed(2)}`;
+
+        recordDiv.innerHTML = `
+            <div class="details">
+                <img src="${record.icon}" alt="${record.category}">
+                <span class="category">${record.category}</span>
+            </div>
+            <span class="amount ${record.isExpense ? 'red' : 'green'}">
+                ${amount}
+            </span>
+            <span class="time">${time}</span>
+            <span class="remark">${record.remark || ''}</span>
+            <div class="buttons">
+                <button class="delete-btn" onclick="deleteRecord(${record.index}, ${record.isExpense})">Delete</button>
+            </div>
+        `;
+
+        recordsContainer.appendChild(recordDiv);
+    });
+}
+
+function deleteRecord(index, isExpense) {
+    console.log(`Deleting record at index: ${index}, IsExpense: ${isExpense}`);
+
+    const recordsKey = isExpense ? 'expenses' : 'incomes';
+    const records = JSON.parse(localStorage.getItem(recordsKey)) || [];
+
+    // Remove the specific record at the given index
+    records.splice(index, 1);
+
+    // Debugging: log the updated records
+    console.log("Updated records:", records);
+
+    localStorage.setItem(recordsKey, JSON.stringify(records));
+
+    // Refresh the UI
+    displayRecords();
+    calculateTotals();
+}
+
+function calculateTotals() {
+    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    const incomes = JSON.parse(localStorage.getItem('incomes')) || [];
+
+    const totalExpenses = expenses.reduce((total, record) => total + parseFloat(record.amount || 0), 0);
+    const totalIncome = incomes.reduce((total, record) => total + parseFloat(record.amountIncome || 0), 0);
+
+    document.getElementById('totalExpenses').textContent = totalExpenses.toFixed(2);
+    document.getElementById('totalIncome').textContent = totalIncome.toFixed(2);
+}
+    
+       
+    </script>
+    
+    
+</body>
+</html>
+
+
+
+
+
+

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expense Category Selector</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+   
+<link rel="stylesheet" href="css/addExpenses.css">
+
+</head>
+<body>
+    <div class="container">
+   
+        <div class="header">
+            <a href="record.html"><button>&lt;</button></a>
+            <div class="category-tabs">
+                <button >Expenses</button>
+                <a style="text-decoration:none" href="addIncome.html"><button >Income</button></a>
+                <button>Transfer</button>
+            </div>
+        </div>
+     
+     
+        <div class="categories" >            
+            <div class="category-item">
+                <button  onclick="selectCategory('Food', 'image/iconFood.png')">
+                    <img src="image/iconFood.png" alt="Food">
+                    <span>Food</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Fruits', 'image/iconFruits.png')">
+                    <img src="image/iconFruits.png" alt="Fruits">
+                    <span>Fruit</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Drink', 'image/iconDrink.png')">
+                    <img src="image/iconDrink.png" alt="Drink">
+                    <span>Drink</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Dessert', 'image/iconDessert.png')">
+                    <img src="image/iconDessert.png" alt="Dessert">
+                    <span>Dessert</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Car', 'image/iconCar.png')">
+                    <img src="image/iconCar.png" alt="Car">
+                    <span>Car</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Bus', 'image/iconBus.png')">
+                    <img src="image/iconBus.png" alt="Bus">
+                    <span>Bus</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Clothes', 'image/iconClothes.png')">
+                    <img src="image/iconClothes.png" alt="Clothes">
+                    <span>Clothes</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Comestic', 'image/iconComestic.png')">
+                    <img src="image/iconComestic.png" alt="Cosmetic">
+                    <span>Cosmetic</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Delivery', 'image/iconDelivery.png')">
+                    <img src="image/iconDelivery.png" alt="Delivery">
+                    <span>Delivery</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Dessert', 'image/iconDessert.png')">
+                    <img src="image/iconDessert.png" alt="Dessert">
+                    <span>Dessert</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Drink', 'image/iconDrink.png')">
+                    <img src="image/iconDrink.png" alt="Drink">
+                    <span>Drink</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Feed', 'image/iconFeed.png')">
+                    <img src="image/iconFeed.png" alt="Feed">
+                    <span>Feed</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Fuel', 'image/iconFuel.png')">
+                    <img src="image/iconFuel.png" alt="Fuel">
+                    <p>Fuel</p>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Game', 'image/iconGame.png')">
+                    <img src="image/iconGame.png" alt="Game">
+                    <span>Game</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Medical', 'image/iconMedical.png')">
+                    <img src="image/iconMedical.png" alt="Medical">
+                    <span>Medical</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Bus', 'image/iconBus.png')">
+                    <img src="image/iconPet.png" alt="Pet">
+                    <span>Pet</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Bus', 'image/iconBus.png')">
+                    <img src="image/iconRestaurant.png" alt="Restaurant">
+                    <span>Restaurant</span> 
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Shopping', 'image/iconShopping.png')">
+                    <img src="image/iconShopping.png" alt="Shopping">
+                    <span>Shopping</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Sport', 'image/iconSport.png')">
+                    <img src="image/iconSport.png" alt="Sport">
+                    <span>Sport</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Tool', 'image/iconTool.png')">
+                    <img src="image/iconTool.png" alt="Tool">
+                    <span>Tool</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Travel', 'image/iconTravel.png')">
+                    <img src="image/iconTravel.png" alt="Travel">
+                    <span>Travel</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('Vegetable', 'image/iconVegetable.png')">
+                    <img src="image/iconVegetable.png" alt="Vegetable">
+                    <span>Vegetable</span>
+                </button>
+            </div>
+            <div class="category-item">
+                <button onclick="selectCategory('new', 'image/addCategory.png')">
+                    <img src="image/addCategory.png" alt="New">
+                    <span>New</span>
+                </button>
+           
+            </div>
+        </div>
+   
+    </div>
+    
+ 
+
+        <div class="footer">
+            <div class="input-fields">
+                <input type="text" id="amount" placeholder="Amount">
+                <input type="text" id="remark" placeholder="Remark">
+            </div>
+
+            <div class="date-picker">
+                <input type="date" id="expenseDate" placeholder="Select Date">
+            </div>
+
+            <div class="calculator">
+                <button onclick="pressNumber(1)">1</button>
+                <button onclick="pressNumber(2)">2</button>
+                <button onclick="pressNumber(3)">3</button>
+                <button onclick="setOperation('+')">+</button>
+                <button onclick="pressNumber(4)">4</button>
+                <button onclick="pressNumber(5)">5</button>
+                <button onclick="pressNumber(6)">6</button>
+                <button onclick="setOperation('-')">-</button>
+                <button onclick="pressNumber(7)">7</button>
+                <button onclick="pressNumber(8)">8</button>
+                <button onclick="pressNumber(9)">9</button>
+                <button onclick="deleteLast()">←</button>
+                <button onclick="pressNumber(0)">0</button>
+                <button onclick="addDecimal()">.</button>
+                <button onclick="calculate()">=</button>
+                <button id="save-btn" onclick="saveData()">
+                    <img src="image/excited.png" width="20px" height="20px"> Save
+                </button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    let selectedCategory = null;
+    let operation = null;
+    let amountField = "";
+    let currentOperationValue = 0;
+    let expenseDate = new Date();
+
+    // Category selection function (same as before)
+    function selectCategory(name, icon) {
+        selectedCategory = { name, icon };
+    }
+
+    // Handle number and operation inputs for the calculator
+    function pressNumber(num) {
+        amountField += num;
+        document.getElementById('amount').value = amountField;
+    }
+
+    function addDecimal() {
+        if (!amountField.includes(".")) {
+            amountField += ".";
+            document.getElementById('amount').value = amountField;
+        }
+    }
+
+    function deleteLast() {
+        amountField = amountField.slice(0, -1);
+        document.getElementById('amount').value = amountField;
+    }
+
+    function setOperation(op) {
+        operation = op;
+        if (amountField) {
+            currentOperationValue = parseFloat(amountField);
+            amountField = "";
+            document.getElementById('amount').value = "";
+        }
+    }
+
+    function calculate() {
+        if (operation && amountField) {
+            let newValue = parseFloat(amountField);
+            if (operation === "+") {
+                currentOperationValue += newValue;
+            } else if (operation === "-") {
+                currentOperationValue -= newValue;
+            }
+            amountField = currentOperationValue.toString();
+            operation = null;
+            document.getElementById('amount').value = amountField;
+        }
+    }
+
+    function saveData() {
+        if (!selectedCategory) {
+            alert("Please select a category!");
+            return;
+        }
+
+        const amount = parseFloat(document.getElementById('amount').value);
+        const remark = document.getElementById('remark').value;
+        const dateInput = document.getElementById('expenseDate').value;
+
+        if (dateInput) {
+            expenseDate = new Date(dateInput);
+        } else {
+            expenseDate = new Date(); // Use current date if none selected
+        }
+
+        if (isNaN(amount) || amount <= 0) {
+            alert("Please enter a valid amount!");
+            return;
+        }
+
+        const expenseRecord = {
+            category: selectedCategory.name,
+            icon: selectedCategory.icon,
+            amount,
+            remark,
+            date: expenseDate.toLocaleString(),
+        };
+
+        // Retrieve existing expenses
+        let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+        expenses.push(expenseRecord);
+
+        // Save updated expenses to localStorage
+        localStorage.setItem("expenses", JSON.stringify(expenses));
+
+        alert("Expense saved!");
+        resetFields();
+
+        // Redirect to the records page
+        window.location.href = 'record.html';
+    }
+
+    function resetFields() {
+        selectedCategory = null;
+        amountField = "";
+        currentOperationValue = 0;
+        operation = null;
+        document.getElementById('amount').value = "";
+        document.getElementById('remark').value = "";
+        document.getElementById('expenseDate').value = ""; // Reset the date picker
+    }
+</script>
+
+
+</body>
+</html>

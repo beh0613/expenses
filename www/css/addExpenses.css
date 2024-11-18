@@ -1,0 +1,140 @@
+body, html {
+    font-family: Arial, sans-serif;
+    background-color: #fef0e5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /* Prevents page scroll, only content scrolls */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: auto;
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #f9f5ec;
+}
+
+.header button {
+    background-color: #f1d1b3;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 14px;
+}
+
+.category-tabs {
+    display: flex;
+    gap: 10px;
+}
+
+.category-tabs button {
+    background-color: #f9f5ec;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+.content {
+    flex: 1;
+    overflow-y: auto; /* Enables scrolling within this section */
+    padding: 10px 15px;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    flex: 1 1 auto; /* Take up remaining space, and shrink/grow as needed */
+    overflow-y: auto;
+    padding: 10px;
+    border: 1px solid #ccc;
+    max-height: 200px;
+    width: 100%; /* Full width relative to its parent */
+    max-width: 1200px; /* Optional: set a max width to prevent it from becoming too wide */
+    border-style: none;
+}
+
+.category-item button {
+    background-color: #f9e1c6;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    border: 1px solid #ddd;
+    cursor: pointer;
+}
+
+.category-item img {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+.footer {
+    background-color: #f6e8d5;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-fields {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.input-fields input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.date-picker {
+    margin-bottom: 10px;
+}
+
+.date-picker input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-size: 14px;
+}
+
+.calculator {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.calculator button {
+    background-color: #f1d1b3;
+    border: none;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+}
