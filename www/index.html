@@ -20,10 +20,23 @@
         text-align: center;
     }
     .welcomeIMG {
-        width: 300px;
-        height: auto;
-        margin-bottom: 20px;
-    }
+    width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 50%; /* Already good for circular shape */
+    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.3), /* Soft shadow for depth */
+                0px 5px 5px rgba(0, 0, 0, 0.2) inset; /* Inner shadow for a recessed effect */
+    border: 5px solid rgba(255, 255, 255, 0.8); /* Light border for a clean finish */
+    background: linear-gradient(145deg, #f0f0f0, #d9d9d9); /* Subtle gradient for 3D lighting */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth animation for hover effect */
+}
+
+.welcomeIMG:hover {
+    transform: scale(1.05); /* Slightly enlarges for interaction feedback */
+    box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.4), 
+                0px 7px 7px rgba(0, 0, 0, 0.2) inset;
+}
+
     .btn {
         margin: 10px;
         padding: 10px 20px;
