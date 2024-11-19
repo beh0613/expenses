@@ -1,0 +1,263 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f9fc;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    padding: 20px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  
+}
+
+.subheader{
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 35px;
+    color: #555;
+
+}
+.header div {
+    padding: 12px 20px;
+    background-color: #fffbf2;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 16px;
+    color: #555;
+}
+
+
+.header div.setup {
+    background-color: #e0f7fa;
+}
+
+.header .username {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.balance {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.balance div {
+    text-align: center;
+    padding: 15px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Record Section Styling */
+.records {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+}
+
+.records h3 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Updated Record Item Styling */
+.record-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 15px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    position: relative;
+    background-color: #fafafa;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.record-item:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+.record-header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.record-day {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    
+}
+
+.time {
+    font-size: 8px;
+    color: #777;
+    margin-top: 5px;
+    
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px; /* Added margin for separation */
+}
+
+.details img {
+    width: 50px;  
+    height: 50px;  
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.category {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+.amount {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.amount.red {
+    color: #e74c3c; 
+}
+
+.amount.green {
+    color: #27ae60; 
+}
+
+.remark {
+    font-size: 14px;
+    color: #777;
+    margin-top: 5px;
+}
+
+.time {
+    font-size: 10px;
+    color: #777;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+}
+
+.edit-btn, .delete-btn {
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+}
+
+.edit-btn {
+    background-color: #f39c12;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #e67e22;
+}
+
+.delete-btn {
+    background-color: #fae3e0;
+    color: white;
+}
+
+.delete-btn img {
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+}
+
+.delete-btn:hover {
+    background-color: #c0392b;
+}
+
+/* Footer Styling */
+.footer {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    background-color: #ffffff;
+    padding: 15px 0;
+    border-top: 1px solid #ddd;
+    border-radius: 30px;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    align-items: center;
+}
+
+.footer img {
+    width: 50px;
+    height: 50px;
+    margin-right: 50px;
+   
+}
+
+.add-expense-btn {
+    position: fixed;
+    bottom: 25px; /* Placed above the footer */
+    right: 10px; /* Positioned towards the right */
+    background-color: #c7e8f5;
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999; /* Ensure it stays above the footer */
+    transition: 0.3s ease;
+}
+
+.add-expense-btn:hover {
+    background-color: #e67e22;
+}
+
+.add-expense-btn img {
+    width: 35px;
+    height: 35px;
+}

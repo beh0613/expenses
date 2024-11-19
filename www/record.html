@@ -4,226 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Expenses Tracker</title>
-<style>
- /* Body and Global Settings */
-body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #f4f9fc;
-    color: #333;
-    margin: 0;
-    padding: 0;
-}
+<link rel="stylesheet" href="css/record.css">
 
-.container {
-    padding: 20px;
-}
-
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-}
-
-.subheader{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding: 12px 20px;
-    background-color: #fffbf2;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 16px;
-    color: #555;
-
-}
-.header div {
-    padding: 12px 20px;
-    background-color: #fffbf2;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 16px;
-    color: #555;
-}
-
-
-.header div.setup {
-    background-color: #e0f7fa;
-}
-
-.header .username {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-}
-
-.balance {
-    display: flex;
-    justify-content: space-between;
-    margin: 20px 0;
-    font-size: 18px;
-}
-
-.balance div {
-    text-align: center;
-    padding: 15px;
-    border-radius: 12px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Record Section Styling */
-.records {
-    background-color: #ffffff;
-    border-radius: 12px;
-    padding: 20px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-}
-
-.records h3 {
-    font-size: 20px;
-    margin-bottom: 15px;
-    color: #333;
-}
-
-/* Updated Record Item Styling */
-.record-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 15px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    position: relative;
-    background-color: #fafafa;
-    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    box-sizing: border-box;
-}
-
-.record-item:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    transform: translateY(-2px);
-}
-
-.record-header {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    margin-bottom: 10px;
-}
-
-.record-day {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-}
-
-.time {
-    font-size: 14px;
-    color: #777;
-    margin-top: 5px;
-}
-
-.details {
-    display: flex;
-    align-items: center;
-    width: 60%;
-    margin-bottom: 10px; /* Added margin for separation */
-}
-
-.details img {
-    width: 50px;  /* Increased icon size */
-    height: 50px;  /* Increased icon size */
-    border-radius: 50%;
-    margin-right: 15px;
-}
-
-.category {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333;
-}
-
-.amount {
-    font-size: 16px;
-    font-weight: bold;
-    margin-top: 5px;
-    color: #333;
-    width: 20%;
-    text-align: right;
-}
-
-.amount.red {
-    color: #e74c3c; /* Red for expense */
-}
-
-.amount.green {
-    color: #27ae60; /* Green for income */
-}
-
-.remark {
-    font-size: 14px;
-    color: #777;
-    margin-top: 5px;
-}
-
-.buttons {
-    display: flex;
-    justify-content: flex-end;
-    gap: 10px;
-}
-
-.edit-btn, .delete-btn {
-    cursor: pointer;
-    padding: 5px 10px;
-    font-size: 14px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    transition: 0.3s ease;
-}
-
-.edit-btn {
-    background-color: #f39c12;
-    color: white;
-}
-
-.edit-btn:hover {
-    background-color: #e67e22;
-}
-
-.delete-btn {
-    background-color: #e74c3c;
-    color: white;
-}
-
-.delete-btn:hover {
-    background-color: #c0392b;
-}
-
-/* Footer Styling */
-.footer {
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    background-color: #ffffff;
-    padding: 15px 0;
-    border-top: 1px solid #ddd;
-    border-radius: 30px;
-    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
-}
-
-.footer img {
-    width: 35px;
-    height: 35px;
-}
-
-</style>
 </head>
 <body>
     <div class="container">
@@ -234,14 +16,15 @@ body {
         </div>
         
         <div class="subheader">
-            <div>All Ledgers</div>
-            <div class="setup">Setup Budget</div>
+            <div>Records</div>
+            
         </div>
         <div class="balance">
             <div class="totalExpenses">
                 <p>Expenses</p>
                 <p id="totalExpenses" style="color: red;">0</p>
             </div>
+            <img src="image/profilePic8.gif" width="150px" height="150px" style="border-radius: 40px;">
             <div class="totalIncome">
                 <p>Income</p>
                 <p id="totalIncome" style="color: green;">0</p>
@@ -255,9 +38,13 @@ body {
             </div>
         </div>
     </div>
-    
+
+    <a href="addExpenses.html" class="add-expense-btn" onclick="addNewExpense(), addNewIncome()">
+        <img src="image/iconEdit.png" alt="Add Expense">
+    </a>   
     <div class="footer">
-        <a href="addExpenses.html"><img src="image/iconEdit.png" alt="Add Expense"></a>
+        <a href="record.html" ><img src="image/record.gif" alt="record"></a>
+         
     </div>
     <script>
         window.onload = function () {
@@ -265,101 +52,139 @@ body {
             calculateTotals();
             displayUsername();
         };
-    
+
         function displayUsername() {
             const username = localStorage.getItem('currentUser');
             if (username) {
                 document.getElementById('usernameDisplay').textContent = `Hello, ${username}`;
             }
         }
+
         function displayRecords() {
-    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-    const incomes = JSON.parse(localStorage.getItem('incomes')) || [];
     const recordsContainer = document.getElementById('recordsContainer');
-    recordsContainer.innerHTML = ""; // Clear previous records
+    recordsContainer.innerHTML = ''; // Clear previous records
+
+    const incomes = JSON.parse(localStorage.getItem('incomes')) || [];
+    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
 
     const allRecords = [
-        ...expenses.map((rec, index) => ({ ...rec, isExpense: true, index })),
-        ...incomes.map((rec, index) => ({ ...rec, isExpense: false, index })),
+        ...incomes.map((record, index) => ({ ...record, type: 'income', index })),
+        ...expenses.map((record, index) => ({ ...record, type: 'expense', index }))
     ];
 
-    allRecords.sort((a, b) => new Date(b.date) - new Date(a.date)); // Sort by latest date
+    // Sort records by date (descending)
+    allRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    let previousDate = null;
+    let currentDate = null;
 
     allRecords.forEach((record) => {
-        const recordDiv = document.createElement('div');
-        recordDiv.className = 'record-item';
+        const fullDate = new Date(record.date).toLocaleDateString();
+        const time = new Date(record.date).toLocaleTimeString();
 
-        const date = new Date(record.date);
-        const fullDate = date.toLocaleDateString();
-        const time = date.toLocaleTimeString();
-
-        if (previousDate !== fullDate) {
-            previousDate = fullDate;
-            const dateDiv = document.createElement('div');
-            dateDiv.className = 'record-day';
-            dateDiv.textContent = fullDate;
-            recordsContainer.appendChild(dateDiv);
+        // Add a date header if the date changes
+        if (fullDate !== currentDate) {
+            currentDate = fullDate;
+            const dateHeader = document.createElement('div');
+            dateHeader.className = 'date-header';
+            dateHeader.innerHTML = `<h4>${fullDate}</h4>`;
+            recordsContainer.appendChild(dateHeader);
         }
 
-        const amount = record.isExpense
-            ? `-${parseFloat(record.amount || 0).toFixed(2)}`
-            : `+${parseFloat(record.amountIncome || 0).toFixed(2)}`;
-
+        // Create the record item
+        const recordDiv = document.createElement('div');
+        recordDiv.className = 'record-item';
         recordDiv.innerHTML = `
             <div class="details">
-                <img src="${record.icon}" alt="${record.category}">
+                <img src="${record.icon || 'path/to/default-icon.png'}" alt="${record.category}" class="category-icon">
                 <span class="category">${record.category}</span>
             </div>
-            <span class="amount ${record.isExpense ? 'red' : 'green'}">
-                ${amount}
+            <span class="amount ${record.type === 'income' ? 'green' : 'red'}">
+                ${record.type === 'income' ? '+' : '-'} ${parseFloat(record.amountIncome || record.amount).toFixed(2)}
             </span>
+            <span class="remark">${record.remarkIncome || record.remark || ''}</span>
             <span class="time">${time}</span>
-            <span class="remark">${record.remark || ''}</span>
             <div class="buttons">
-                <button class="delete-btn" onclick="deleteRecord(${record.index}, ${record.isExpense})">Delete</button>
+                <button class="edit-btn" onclick="editRecord(${record.index}, ${record.type === 'expense'})">
+                    <img src="image/edit.gif" alt="Edit" width="30px" height="30px">
+                </button>
+                <button class="delete-btn" onclick="deleteRecord(${record.index}, ${record.type === 'expense'})">
+                    <img src="image/delete.gif" alt="Delete" width="30px" height="30px">
+                </button>
             </div>
         `;
-
         recordsContainer.appendChild(recordDiv);
     });
 }
 
+
+function editRecord(index, isExpense) {
+    // Store the record index in localStorage only if you're editing an existing record
+    const key = isExpense ? "expenses" : "incomes";
+    const records = JSON.parse(localStorage.getItem(key)) || [];
+
+    // Store the index of the record you're editing
+    localStorage.setItem('editRecordIndex', index);
+
+    // Redirect to the appropriate page for editing
+    if (isExpense) {
+        window.location.href = "addExpenses.html"; // Expense edit page
+    } else {
+        window.location.href = "addIncome.html"; // Income edit page
+    }
+}
+function addNewExpense() {
+    // Clear the editRecordIndex to ensure you're not in edit mode
+    localStorage.removeItem('editRecordIndex');
+
+    // Proceed with your logic for adding a new expense
+    // For example, resetting the form fields
+    document.getElementById('amountExpense').value = '';
+    document.getElementById('remarkExpense').value = '';
+    document.getElementById('expenseDate').value = '';
+    document.getElementById('categoryIcon').src = ''; // Reset icon if necessary
+}
+
+function addNewIncome() {
+    // Clear the editRecordIndex to ensure you're not in edit mode
+    localStorage.removeItem('editRecordIndex');
+
+    // Proceed with your logic for adding a new expense
+    // For example, resetting the form fields
+    document.getElementById('amountIncome').value = '';
+    document.getElementById('remarkIncome').value = '';
+    document.getElementById('expenseDate').value = '';
+    document.getElementById('categoryIcon').src = ''; // Reset icon if necessary
+}
+
+
 function deleteRecord(index, isExpense) {
-    console.log(`Deleting record at index: ${index}, IsExpense: ${isExpense}`);
+    // Retrieve the appropriate records array from local storage
+    const key = isExpense ? "expenses" : "incomes";
+    let records = JSON.parse(localStorage.getItem(key)) || [];
 
-    const recordsKey = isExpense ? 'expenses' : 'incomes';
-    const records = JSON.parse(localStorage.getItem(recordsKey)) || [];
-
-    // Remove the specific record at the given index
+    // Remove the record at the specified index
     records.splice(index, 1);
 
-    // Debugging: log the updated records
-    console.log("Updated records:", records);
+    // Save the updated array back to local storage
+    localStorage.setItem(key, JSON.stringify(records));
 
-    localStorage.setItem(recordsKey, JSON.stringify(records));
-
-    // Refresh the UI
+    // Refresh the records displayed on the page
     displayRecords();
     calculateTotals();
 }
 
-function calculateTotals() {
-    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-    const incomes = JSON.parse(localStorage.getItem('incomes')) || [];
 
-    const totalExpenses = expenses.reduce((total, record) => total + parseFloat(record.amount || 0), 0);
-    const totalIncome = incomes.reduce((total, record) => total + parseFloat(record.amountIncome || 0), 0);
+        function calculateTotals() {
+            const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+            const incomes = JSON.parse(localStorage.getItem('incomes')) || [];
 
-    document.getElementById('totalExpenses').textContent = totalExpenses.toFixed(2);
-    document.getElementById('totalIncome').textContent = totalIncome.toFixed(2);
-}
-    
-       
+            const totalExpenses = expenses.reduce((total, record) => total + parseFloat(record.amount || 0), 0);
+            const totalIncome = incomes.reduce((total, record) => total + parseFloat(record.amountIncome || 0), 0);
+
+            document.getElementById('totalExpenses').textContent = totalExpenses.toFixed(2);
+            document.getElementById('totalIncome').textContent = totalIncome.toFixed(2);
+        }
     </script>
-    
-    
 </body>
 </html>
 
