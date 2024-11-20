@@ -94,13 +94,13 @@
         <button onclick="pressNumber(8)">8</button>
         <button onclick="pressNumber(9)">9</button>
         <button onclick="deleteLast()">←</button>
-        <button onclick="quickAdd()" style="background-color: white;"><img src="image/excited.png" width="45px" height="35px">ADD</button>
+        <button onclick="quickAddIncome()" style="background-color: white;"><img src="image/excited.png" width="45px" height="35px">ADD</button>
         <button onclick="pressNumber(0)">0</button>
         <button onclick="addDecimal()">.</button>
         <button onclick="calculate()">=</button>
         <button onclick="resetFields()" ><img src="image/reset.png" width="50px" height="50px"></button>
 
-        <button id="save-btn" onclick="save()" style="background-color: white;">
+        <button id="save-btn" onclick="saveIncome()" style="background-color: white;">
             <img src="image/saveRecord.gif" width="30px" height="30px"> Save
         </button>
     </div>
@@ -113,6 +113,7 @@
     let operation = null;
     let amountField = ""; // Holds the arithmetic expression as a string
     let currentOperationValue = 0;
+    let equalsPressed=false;
 
     // Function to select category and toggle color
 // Function to select category and toggle color
@@ -128,22 +129,13 @@ function selectCategory(event,name, icon) {
     event.target.style.backgroundColor = "lightblue"; // Set color to blue when selected
 }
 
-        function asset() {
-    const incomes = JSON.parse(localStorage.getItem('incomes')) || [];
-    if (incomes.length === 0) {
-        alert("No assets found!");
-        return;
-    }
 
-    // Group incomes by category and calculate totals
-    const groupedIncomes = incomes.reduce((acc, income) => {
-        if (acc[income.category]) {
-            acc[income.category].amount += parseFloat(income.amountIncome);
-        } else {
-            acc[income.category] = { name: income.category, icon: income.icon, amount: parseFloat(income.amountIncome) };
-        }
-        return acc;
-    }, {});
+function asset() {
+    const assets = [
+        { name: 'Cash', icon: 'image/incomeCash.png' },
+        { name: 'Ewallet', icon: 'image/ewallet.png' },
+        { name: 'CardNumber', icon: 'image/bankCard.png' }
+    ];
 
     // Create a container to display the assets
     const assetContainer = document.createElement('div');
@@ -161,74 +153,52 @@ function selectCategory(event,name, icon) {
     assetContainer.style.maxHeight = "80%";
 
     const title = document.createElement('h3');
-    title.textContent = "Asset Summary";
+    title.textContent = "Select Asset";
     title.style.textAlign = "center";
     assetContainer.appendChild(title);
 
-    // Iterate through grouped incomes and create elements
-    for (const key in groupedIncomes) {
-        const { name, icon, amount } = groupedIncomes[key];
-
+    // Loop through the available assets
+    assets.forEach(asset => {
         const item = document.createElement('div');
         item.style.display = "flex";
         item.style.alignItems = "center";
         item.style.marginBottom = "10px";
 
         const img = document.createElement('img');
-        img.src = icon;
-        img.alt = name;
+        img.src = asset.icon;
+        img.alt = asset.name;
         img.style.width = "30px";
         img.style.height = "30px";
         img.style.marginRight = "10px";
 
         const text = document.createElement('span');
-        text.textContent = `${name}: $${amount.toFixed(2)}`;
+        text.textContent = asset.name;
         text.style.flexGrow = "1";
 
-        // Add a "Select" button to deduct expenses
-        const deductButton = document.createElement('button');
-        deductButton.textContent = "Use";
-        deductButton.style.marginLeft = "10px";
-        deductButton.style.backgroundColor = "#007bff";
-        deductButton.style.color = "#fff";
-        deductButton.style.border = "none";
-        deductButton.style.padding = "5px";
-        deductButton.style.borderRadius = "5px";
-        deductButton.style.cursor = "pointer";
+        // Add a "Select" button for each asset
+        const selectButton = document.createElement('button');
+        selectButton.textContent = "Select";
+        selectButton.style.marginLeft = "10px";
+        selectButton.style.backgroundColor = "#007bff";
+        selectButton.style.color = "#fff";
+        selectButton.style.border = "none";
+        selectButton.style.padding = "5px";
+        selectButton.style.borderRadius = "5px";
+        selectButton.style.cursor = "pointer";
 
-        deductButton.addEventListener('click', () => {
-            const expenseAmount = parseFloat(prompt("Enter expense amount:"));
-            if (isNaN(expenseAmount) || expenseAmount <= 0) {
-                alert("Invalid amount. Please enter a positive number.");
-                return;
-            }
-
-            if (expenseAmount > amount) {
-                alert("Insufficient funds in event category!");
-                return;
-            }
-
-            // Deduct the amount and update localStorage
-            groupedIncomes[key].amount -= expenseAmount;
-
-            // Save updated incomes back to localStorage
-            const updatedIncomes = incomes.map(income => {
-                if (income.category === name) {
-                    income.amountIncome = groupedIncomes[key].amount.toFixed(2);
-                }
-                return income;
-            });
-            localStorage.setItem('incomes', JSON.stringify(updatedIncomes));
-
-            alert(`${expenseAmount} deducted from ${name}.`);
+        selectButton.addEventListener('click', () => {
+            // Handle the action for selecting the asset for income or expense
+            alert(`You selected: ${asset.name}`);
+            // Store the selected asset in localStorage or use it in the next step (income/expense handling)
+            localStorage.setItem('selectedAsset', asset.name);
             document.body.removeChild(assetContainer); // Close modal
         });
 
         item.appendChild(img);
         item.appendChild(text);
-        item.appendChild(deductButton);
+        item.appendChild(selectButton);
         assetContainer.appendChild(item);
-    }
+    });
 
     // Add a close button
     const closeButton = document.createElement('button');
@@ -251,6 +221,7 @@ function selectCategory(event,name, icon) {
     // Append container to the body
     document.body.appendChild(assetContainer);
 }
+
 
     // Handle number inputs
     function pressNumber(num) {
@@ -352,7 +323,11 @@ function highlightCategoryButton(categoryName) {
     });
 }
 
-function add_save() {
+function quickAddIncome() {
+    if (operation && !equalsPressed) {
+        alert("Please complete the calculation by pressing '=' before saving.");
+        return;
+    }
     const amountIncome = parseFloat(document.getElementById('amountIncome').value);
     const remarkIncome = document.getElementById('remarkIncome').value;
 
@@ -368,27 +343,11 @@ function add_save() {
         return;
     }
 
+    // Use the selected asset or default to 'Cash'
+    const selectedAsset = localStorage.getItem('selectedAsset') || 'Cash';
+
     // Use the selected date or default to today's date in YYYY-MM-DD format
     const incomeDate = document.getElementById('incomeDate').value || new Date().toISOString().split('T')[0];
-
-    // Parse the selected date and adjust for Malaysia Time Zone (UTC+8)
-    const date = new Date(incomeDate);
-    const malaysiaOffset = 8 * 60; // UTC+8 in minutes
-    const localOffset = date.getTimezoneOffset(); // Get user's local timezone offset in minutes
-    const adjustedDate = new Date(date.getTime() + (malaysiaOffset - localOffset) * 60 * 1000);
-
-    // Format the date to a human-readable format in Malaysia Time Zone
-    const options = {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: true,
-        timeZone: 'MYS'
-    };
-    const formattedDate = new Intl.DateTimeFormat('en-US', options).format(adjustedDate);
 
     // Create the income record
     const incomeRecord = {
@@ -396,7 +355,8 @@ function add_save() {
         icon: selectedCategory.icon,
         amountIncome,
         remarkIncome,
-        date: formattedDate,
+        date: incomeDate,
+        asset: selectedAsset, // Store asset type
     };
 
     // Fetch or initialize incomes from localStorage
@@ -407,42 +367,90 @@ function add_save() {
     if (editRecordIndex !== null && editRecordIndex !== "null") {
         // Update the record
         incomes[editRecordIndex] = incomeRecord;
-        localStorage.removeItem('editRecordIndex'); // Clear edit flag
+        localStorage.removeItem('editRecordIndex'); // Clear edit mode
     } else {
-        // Add a new record
+        // Add new income
         incomes.push(incomeRecord);
     }
 
-    // Save incomes back to localStorage
+    // Save the updated incomes to localStorage
     localStorage.setItem('incomes', JSON.stringify(incomes));
 
-    // Confirm and reset
-    alert("Income saved successfully!");
+    // Clear input fields
+    document.getElementById('amountIncome').value = '';
+    document.getElementById('remarkIncome').value = '';
+    document.getElementById('incomeDate').value = '';
+
+    // Provide feedback
+    alert("Income added successfully!");
+    resetFields();
 }
 
-// Quick add income
-function quickAdd() {
-        add_save();
-        resetFields(); 
+function saveIncome() {
+    if (operation && !equalsPressed) {
+        alert("Please complete the calculation by pressing '=' before saving.");
+        return;
+    }
+    const amountIncome = parseFloat(document.getElementById('amountIncome').value);
+    const remarkIncome = document.getElementById('remarkIncome').value;
+
+    // Validate the amount
+    if (isNaN(amountIncome) || amountIncome <= 0) {
+        alert("Please enter a valid amount!");
+        return;
     }
 
+    // Validate category selection
+    if (!selectedCategory) {
+        alert("Please select a category!");
+        return;
+    }
 
-function save(){
-    add_save();
+    // Use the selected asset or default to 'Cash'
+    const selectedAsset = localStorage.getItem('selectedAsset') || 'Cash';
+
+    // Use the selected date or default to today's date in YYYY-MM-DD format
+    const incomeDate = document.getElementById('incomeDate').value || new Date().toISOString().split('T')[0];
+
+    // Create the income record
+    const incomeRecord = {
+        category: selectedCategory.name,
+        icon: selectedCategory.icon,
+        amountIncome,
+        remarkIncome,
+        date: incomeDate,
+        asset: selectedAsset, // Store asset type
+    };
+
+    // Fetch or initialize incomes from localStorage
+    let incomes = JSON.parse(localStorage.getItem('incomes')) || [];
+
+    // Check if editing an existing record
+    const editRecordIndex = localStorage.getItem('editRecordIndex');
+    if (editRecordIndex !== null && editRecordIndex !== "null") {
+        // Update the record
+        incomes[editRecordIndex] = incomeRecord;
+        localStorage.removeItem('editRecordIndex'); // Clear edit mode
+    } else {
+        // Add new income
+        incomes.push(incomeRecord);
+    }
+
+    // Save the updated incomes to localStorage
+    localStorage.setItem('incomes', JSON.stringify(incomes));
+
+    // Clear input fields
+    document.getElementById('amountIncome').value = '';
+    document.getElementById('remarkIncome').value = '';
+    document.getElementById('incomeDate').value = '';
+
+    // Provide feedback
+    alert("Income added successfully!");
     resetFields();
     window.location.href = 'record.html'; // Navigate to the records page
 
 }
 
-
-
-
-
-
-
-    
-    // Save income and redirect to another page
-    
 
     // Reset fields after saving or canceling
     function resetFields() {

@@ -209,6 +209,8 @@
         let currentOperationValue = 0;
         let expenseDate = new Date();
         let equalsPressed = false; // Tracks if '=' was pressed
+        
+        
         function selectCategory(event, name, icon) {
     selectedCategory = { name, icon };
 
@@ -271,58 +273,17 @@ function calculate() {
     }
 }
 
-function saveData() {
-    if (!selectedCategory) {
-        alert("Please select a category!");
-        return;
-    }
-
-    const amount = parseFloat(document.getElementById('amount').value);
-    const remark = document.getElementById('remark').value;
-    const dateInput = document.getElementById('expenseDate').value;
-
-    const expenseDate = dateInput ? new Date(dateInput) : new Date();
-
-    if (isNaN(amount) || amount <= 0) {
-        alert("Please enter a valid amount!");
-        return;
-    }
-
-    const expenseRecord = {
-        category: selectedCategory.name,
-        icon: selectedCategory.icon,
-        amount,
-        remark,
-        date: new Date(expenseDate).toLocaleString('en-US', { timeZone: 'MYT' }), // Force UTC time zone
-    };
-
-    let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
-    expenses.push(expenseRecord);
-    localStorage.setItem("expenses", JSON.stringify(expenses));
-
-    alert("Expense saved!");
-    
-}
-
 
 
 
 function asset() {
-    const incomes = JSON.parse(localStorage.getItem('incomes')) || [];
-    if (incomes.length === 0) {
-        alert("No assets found!");
-        return;
-    }
+    const assets = [
+        { name: 'Cash', icon: 'image/incomeCash.png' },
+        { name: 'Ewallet', icon: 'image/ewallet.png' },
+        { name: 'CardNumber', icon: 'image/bankCard.png' }
+    ];
 
-    const groupedIncomes = incomes.reduce((acc, income) => {
-        if (acc[income.category]) {
-            acc[income.category].amount += parseFloat(income.amountIncome);
-        } else {
-            acc[income.category] = { name: income.category, icon: income.icon, amount: parseFloat(income.amountIncome) };
-        }
-        return acc;
-    }, {});
-
+    // Create a container to display the assets
     const assetContainer = document.createElement('div');
     assetContainer.style.position = "fixed";
     assetContainer.style.top = "50%";
@@ -338,51 +299,54 @@ function asset() {
     assetContainer.style.maxHeight = "80%";
 
     const title = document.createElement('h3');
-    title.textContent = "Asset Summary";
+    title.textContent = "Select Asset";
     title.style.textAlign = "center";
     assetContainer.appendChild(title);
 
-    for (const key in groupedIncomes) {
-        const { name, icon, amount } = groupedIncomes[key];
-
+    // Loop through the available assets
+    assets.forEach(asset => {
         const item = document.createElement('div');
         item.style.display = "flex";
         item.style.alignItems = "center";
         item.style.marginBottom = "10px";
 
         const img = document.createElement('img');
-        img.src = icon;
-        img.alt = name;
+        img.src = asset.icon;
+        img.alt = asset.name;
         img.style.width = "30px";
         img.style.height = "30px";
         img.style.marginRight = "10px";
 
         const text = document.createElement('span');
-        text.textContent = `${name}: $${amount.toFixed(2)}`;
+        text.textContent = asset.name;
         text.style.flexGrow = "1";
 
-        const deductButton = document.createElement('button');
-        deductButton.textContent = "Use";
-        deductButton.style.marginLeft = "10px";
-        deductButton.style.backgroundColor = "#007bff";
-        deductButton.style.color = "#fff";
-        deductButton.style.border = "none";
-        deductButton.style.padding = "5px";
-        deductButton.style.borderRadius = "5px";
-        deductButton.style.cursor = "pointer";
+        // Add a "Select" button for each asset
+        const selectButton = document.createElement('button');
+        selectButton.textContent = "Select";
+        selectButton.style.marginLeft = "10px";
+        selectButton.style.backgroundColor = "#007bff";
+        selectButton.style.color = "#fff";
+        selectButton.style.border = "none";
+        selectButton.style.padding = "5px";
+        selectButton.style.borderRadius = "5px";
+        selectButton.style.cursor = "pointer";
 
-        deductButton.addEventListener('click', () => {
-            localStorage.setItem('selectedCategory', JSON.stringify({ name, icon }));
-            
-            window.location.href = "addExpenses.html"; // Redirect to add expense page
+        selectButton.addEventListener('click', () => {
+            // Handle the action for selecting the asset for income or expense
+            alert(`You selected: ${asset.name}`);
+            // Store the selected asset in localStorage or use it in the next step (income/expense handling)
+            localStorage.setItem('selectedAsset', asset.name);
+            document.body.removeChild(assetContainer); // Close modal
         });
 
         item.appendChild(img);
         item.appendChild(text);
-        item.appendChild(deductButton);
+        item.appendChild(selectButton);
         assetContainer.appendChild(item);
-    }
+    });
 
+    // Add a close button
     const closeButton = document.createElement('button');
     closeButton.textContent = "Close";
     closeButton.style.marginTop = "20px";
@@ -399,10 +363,20 @@ function asset() {
     });
 
     assetContainer.appendChild(closeButton);
+
+    // Append container to the body
     document.body.appendChild(assetContainer);
 }
 
-function quickAdd_save(){
+
+
+function quickAdd_save() {
+    // Check if an operation was selected and equals was pressed
+    if (operation && !equalsPressed) {
+        alert("Please complete the calculation by pressing '=' before saving.");
+        return;
+    }
+
     const amount = parseFloat(document.getElementById('amount').value);
     const remark = document.getElementById('remark').value;
     const dateInput = document.getElementById('expenseDate').value;
@@ -410,6 +384,13 @@ function quickAdd_save(){
 
     if (isNaN(amount) || amount <= 0) {
         alert("Please enter a valid amount!");
+        return;
+    }
+
+    // Ensure an asset is selected
+    const selectedAsset = localStorage.getItem('selectedAsset');
+    if (!selectedAsset) {
+        alert("Please select an asset!");
         return;
     }
 
@@ -438,19 +419,23 @@ function quickAdd_save(){
             expenseRecord.date = expenseDate.toLocaleString();  // If date is provided, update it
         }
 
+        // Ensure asset is updated (if applicable)
+        expenseRecord.asset = selectedAsset;
+
     } else {
         // For a new record, ensure category is selected
         if (!selectedCategory) {
             alert("Please select a category!");
             return;
         }
-        
+
         expenseRecord = {
             category: selectedCategory.name,
             icon: selectedCategory.icon,
             amount,
             remark,
             date: expenseDate ? expenseDate.toLocaleString() : new Date().toLocaleString(),
+            asset: selectedAsset, // Store asset type
         };
         records.push(expenseRecord);
     }
@@ -458,20 +443,54 @@ function quickAdd_save(){
     // Save the updated records back to localStorage
     localStorage.setItem("expenses", JSON.stringify(records));
     alert("Expense saved!");
-    resetFields();
+    equalsPressed = false;  // Reset equalsPressed after saving
 }
 
 function quickAdd() {
-        quickAdd_save();
-        resetFields();
-    }
-    
-    function save() {
     quickAdd_save();
-    // Redirect back to the record page
+    resetFields();
+}
+
+function save() {
+    // Check if an operation was selected and equals was pressed
+    if (operation && !equalsPressed) {
+        alert("Please complete the calculation by pressing '=' before saving.");
+        return;
+    }
+
+    if (!selectedCategory) {
+        alert("Please select a category!");
+        return;
+    }
+
+    const amount = parseFloat(document.getElementById('amount').value);
+    const remark = document.getElementById('remark').value;
+    const dateInput = document.getElementById('expenseDate').value;
+
+    const expenseDate = dateInput ? new Date(dateInput) : new Date();
+
+    if (isNaN(amount) || amount <= 0) {
+        alert("Please enter a valid amount!");
+        return;
+    }
+
+    const expenseRecord = {
+        category: selectedCategory.name,
+        icon: selectedCategory.icon,
+        amount,
+        remark,
+        date: new Date(expenseDate), 
+        asset: localStorage.getItem('selectedAsset') // Store the selected asset
+    };
+
+    let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
+    expenses.push(expenseRecord);
+    localStorage.setItem("expenses", JSON.stringify(expenses));
+
+    alert("Expense saved!");
     resetFields();
     window.location.href = 'record.html'; // Adjust the redirection URL as needed
-       
+
 }
 
 
@@ -497,8 +516,18 @@ function quickAdd() {
        
 
         window.onload = function () {
+    setDefaultDate();
     loadRecordForEditing();
 };
+
+function setDefaultDate() {
+    const dateInput = document.getElementById('expenseDate');
+    if (!dateInput.value) { // Only set the default if no value is already set
+        const today = new Date();
+        const formattedDate = today.toISOString().split('T')[0]; // Format: yyyy-mm-dd
+        dateInput.value = formattedDate;
+    }
+}
 
 function loadRecordForEditing() {
     const editRecordIndex = localStorage.getItem('editRecordIndex');

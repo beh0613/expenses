@@ -114,12 +114,7 @@ body {
     
 }
 
-.time {
-    font-size: 8px;
-    color: #777;
-    margin-top: 5px;
-    
-}
+
 
 .details {
     display: flex;
@@ -164,13 +159,6 @@ body {
     margin-top: 5px;
 }
 
-.time {
-    font-size: 10px;
-    color: #777;
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-}
 
 .buttons {
     display: flex;
