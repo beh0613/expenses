@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/signup.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/login.js" defer></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Image and Header -->
+        <img src="image/profilePic11.gif" alt="Welcome Image" class="welcomeIMG">
+        <h2>Login to Your Account</h2>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="form-section">
+            <div class="form-group">
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" placeholder="Enter your username" required>
+            </div>
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Enter your password" required>
+            </div>
+            <button type="submit" class="btn">Login</button>
+        </form>
+
+        <!-- Footer Information -->
+        <p class="info-text">
+            Don't have an account? <a href="signin.html" id="signUpLink">Sign Up here</a>
+        </p>
+    </div>
+</body>
+
+</html>

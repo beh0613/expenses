@@ -1,0 +1,143 @@
+/* General Body Styling */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f0f8ff;
+    /* Pastel light blue background */
+    font-family: 'Lobster', cursive;
+    /* Cute font */
+}
+
+/* Main Container */
+.container {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+/* Header Styling */
+h2 {
+    color: #5fa8d9;
+    /* Soft pastel blue for text */
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+/* Image Styling */
+.welcomeIMG {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    /* Circular image */
+    object-fit: cover;
+    /* Ensure proper fit */
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation Links (Login/Sign Up) */
+.toggle-links {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.toggle-links a {
+    text-decoration: none;
+    color: #5fa8d9;
+    font-weight: bold;
+    margin: 0 10px;
+    padding: 5px 10px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.3s, border-color 0.3s;
+}
+
+.toggle-links a:hover {
+    color: #3e90c1;
+    border-color: #5fa8d9;
+}
+
+.toggle-links .active {
+    color: #3e90c1;
+    border-color: #5fa8d9;
+}
+
+/* Form Section (Hidden by default for Login) */
+.form-section {
+    display: block;
+}
+
+/* Input Field Styling */
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    color: #333333;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cfe0f6;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9fcff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #5fa8d9;
+    box-shadow: 0 0 5px rgba(95, 168, 217, 0.3);
+}
+
+/* Button Styling */
+.btn {
+    width: 100%;
+    background-color: #87c6f9;
+    /* Pastel blue button */
+    color: #ffffff;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.3s;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #70aedd;
+}
+
+.btn:active {
+    transform: scale(0.95);
+}
+
+/* Footer Information */
+.info-text {
+    color: #777777;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.info-text a {
+    color: #5fa8d9;
+    text-decoration: none;
+}
+
+.info-text a:hover {
+    text-decoration: underline;
+}
