@@ -16,9 +16,6 @@ body {
     align-items: center;
     margin-bottom: 20px;
 
-}
-
-.subheader {
     justify-content: space-between;
     margin-bottom: 20px;
     padding: 15px;
@@ -28,7 +25,6 @@ body {
     color: #555;
 
 }
-
 .header div {
     padding: 12px 20px;
     background-color: #fffbf2;
@@ -121,13 +117,7 @@ body {
     display: flex;
     align-items: center;
     width: 100%;
-    margin-bottom: 10px;
-    /* Added margin for separation */
-}
 
-.details img {
-    width: 50px;
-    height: 50px;
     border-radius: 50%;
     margin-right: 15px;
 }
@@ -148,11 +138,7 @@ body {
 }
 
 .amount.red {
-    color: #e74c3c;
-}
 
-.amount.green {
-    color: #27ae60;
 }
 
 .remark {
@@ -170,8 +156,7 @@ body {
     right: 15px;
 }
 
-.edit-btn,
-.delete-btn {
+
     cursor: pointer;
     padding: 5px 10px;
     font-size: 14px;
@@ -234,16 +219,12 @@ body {
 
 .add-expense-btn {
     position: fixed;
-    bottom: 25px;
-    /* Placed above the footer */
-    right: 10px;
-    /* Positioned towards the right */
+
     background-color: #c7e8f5;
     border-radius: 50%;
     padding: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-    /* Ensure it stays above the footer */
+
     transition: 0.3s ease;
 }
 

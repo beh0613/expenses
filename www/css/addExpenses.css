@@ -1,20 +1,19 @@
-body, html {
+
+
+html,
+body {
     font-family: Arial, sans-serif;
+    height: 100%;
     background-color: #fef0e5;
     color: #333;
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    /* Prevents page scroll, only content scrolls */
+    overflow: hidden; /* Prevent page scrolling */
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    height: 100%;
-    overflow: auto;
+    height: 100%; /* Full height of viewport */
 }
-
 
 .header {
     display: flex;
@@ -22,6 +21,7 @@ body, html {
     align-items: center;
     padding: 10px 15px;
     background-color: #f9f5ec;
+    flex-shrink: 0; /* Ensure header does not shrink */
 }
 
 .header button {
@@ -46,24 +46,15 @@ body, html {
     color: #555;
 }
 
-.content {
-    flex: 1;
-    overflow-y: auto; /* Enables scrolling within this section */
-    padding: 10px 15px;
-}
-
 .categories {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Responsive grid */
     gap: 10px;
-    flex: 1 1 auto; /* Take up remaining space, and shrink/grow as needed */
-    overflow-y: auto;
     padding: 10px;
-    border: 1px solid #ccc;
-    max-height: 200px;
-    width: 100%; /* Full width relative to its parent */
-    max-width: 1200px; /* Optional: set a max width to prevent it from becoming too wide */
-    border-style: none;
+    overflow-y: auto; /* Enable scrolling */
+    flex-grow: 1; /* Take remaining space after header and footer */
+    width: 100%;
+   max-height: 280px;
 }
 
 .category-item button {
@@ -71,29 +62,42 @@ body, html {
     border-radius: 20px;
     padding: 10px;
     display: flex;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     font-size: 12px;
     font-weight: bold;
-    text-align: left;
+    text-align: center;
     border: 1px solid #ddd;
     cursor: pointer;
+    aspect-ratio: 1; /* Square buttons */
+    min-width: 80px;
+    max-width: 120px;
+}
+.category-item button.active {
+    background-color: #007BFF; /* Blue color for active button */
+    color: white;
 }
 
+.category-item button:hover {
+    background-color: #ddd;
+}
 .category-item img {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
+    width: 50%;
+    height: auto;
+    margin-bottom: 5px;
 }
 
 .footer {
     background-color: #f6e8d5;
     padding: 10px;
     border-top: 1px solid #ddd;
-    position: fixed;
+    position: fixed; /* Fixed at the bottom */
     bottom: 0;
+    left: 0;
+    right: 0;
     width: 100%;
-    display: flex;
-    flex-direction: column;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .input-fields {
@@ -110,11 +114,11 @@ body, html {
     font-size: 14px;
 }
 
-.date-picker {
+#expenseDate {
     margin-bottom: 10px;
 }
 
-.date-picker input {
+#expenseDate {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -122,19 +126,22 @@ body, html {
     font-size: 14px;
 }
 
+
 .calculator {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 10px;
 }
 
 .calculator button {
     background-color: #f1d1b3;
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     padding: 10px;
     font-size: 16px;
     font-weight: bold;
     color: #333;
-    cursor: pointer;
+    cursor: pointer;
 }
+
+
