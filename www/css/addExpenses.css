@@ -1,18 +1,17 @@
-
-
 html,
 body {
     font-family: Arial, sans-serif;
     height: 100%;
-    background-color: #fef0e5;
+    background-color: #e6f3ff;
+    /* Light pastel blue background */
     color: #333;
-    overflow: hidden; /* Prevent page scrolling */
+    overflow: hidden;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Full height of viewport */
+    height: 100%;
 }
 
 .header {
@@ -20,12 +19,14 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    background-color: #f9f5ec;
-    flex-shrink: 0; /* Ensure header does not shrink */
+    background-color: #f0f8ff;
+    /* Alice blue */
+    flex-shrink: 0;
 }
 
 .header button {
-    background-color: #f1d1b3;
+    background-color: #b8d8f9;
+    /* Soft blue */
     border: none;
     border-radius: 10px;
     padding: 10px;
@@ -38,7 +39,8 @@ body {
 }
 
 .category-tabs button {
-    background-color: #f9f5ec;
+    background-color: #f0f8ff;
+    /* Alice blue */
     border: none;
     padding: 5px 10px;
     border-radius: 15px;
@@ -48,17 +50,18 @@ body {
 
 .categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     gap: 10px;
     padding: 10px;
-    overflow-y: auto; /* Enable scrolling */
-    flex-grow: 1; /* Take remaining space after header and footer */
+    overflow-y: auto;
+    flex-grow: 1;
     width: 100%;
-   max-height: 280px;
+    max-height: 280px;
 }
 
 .category-item button {
-    background-color: #f9e1c6;
+    background-color: #cce4ff;
+    /* Lighter pastel blue */
     border-radius: 20px;
     padding: 10px;
     display: flex;
@@ -68,20 +71,24 @@ body {
     font-size: 12px;
     font-weight: bold;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid #d1e5ff;
     cursor: pointer;
-    aspect-ratio: 1; /* Square buttons */
+    aspect-ratio: 1;
     min-width: 80px;
     max-width: 120px;
 }
+
 .category-item button.active {
-    background-color: #007BFF; /* Blue color for active button */
+    background-color: #7eb2ff;
+    /* Brighter blue for active state */
     color: white;
 }
 
 .category-item button:hover {
-    background-color: #ddd;
+    background-color: #b3d1ff;
+    /* Slightly darker on hover */
 }
+
 .category-item img {
     width: 50%;
     height: auto;
@@ -89,15 +96,16 @@ body {
 }
 
 .footer {
-    background-color: #f6e8d5;
+    background-color: #d6e9ff;
+    /* Soft pastel blue */
     padding: 10px;
-    border-top: 1px solid #ddd;
-    position: fixed; /* Fixed at the bottom */
+    border-top: 1px solid #cce0ff;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 5px rgba(173, 216, 230, 0.1);
 }
 
 .input-fields {
@@ -109,23 +117,19 @@ body {
 .input-fields input {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #cce0ff;
     border-radius: 10px;
     font-size: 14px;
-}
-
-#expenseDate {
-    margin-bottom: 10px;
 }
 
 #expenseDate {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #cce0ff;
     border-radius: 10px;
     font-size: 14px;
+    margin-bottom: 10px;
 }
-
 
 .calculator {
     display: grid;
@@ -134,7 +138,8 @@ body {
 }
 
 .calculator button {
-    background-color: #f1d1b3;
+    background-color: #b8d8f9;
+    /* Soft blue */
     border: none;
     border-radius: 15px;
     padding: 10px;
@@ -143,5 +148,4 @@ body {
     color: #333;
     cursor: pointer;
 }
-
 

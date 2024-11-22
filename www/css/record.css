@@ -1,6 +1,10 @@
+/* ===========================
+   General Reset and Base Styles
+   =========================== */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f4f9fc;
+    background-color: #e3f2fd;
+    /* Light pastel blue background */
     color: #333;
     margin: 0;
     padding: 0;
@@ -10,60 +14,131 @@ body {
     padding: 20px;
 }
 
+/* ===========================
+   Header Section
+   =========================== */
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     margin-bottom: 20px;
+    position: relative;
+}
 
+.header .username {
+    font-size: 20px;
+    font-weight: bold;
+    color: #004080;
+    /* Dark blue text */
+    margin-left: 30px;
+    /* Adjusted for navigation icon */
+    position: relative;
+    z-index: 1;
+}
+
+.header div {
+    padding: 12px 20px;
+    background-color: #ffffff;
+    /* White for contrast */
+    border-radius: 15px;
+    text-align: center;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Subheader Section */
+.subheader {
     justify-content: space-between;
     margin-bottom: 20px;
     padding: 15px;
     border-radius: 15px;
     text-align: center;
     font-size: 35px;
-    color: #555;
-
-}
-.header div {
-    padding: 12px 20px;
-    background-color: #fffbf2;
-    border-radius: 15px;
-    text-align: center;
-    font-size: 16px;
-    color: #555;
+    background-color: #bbdefb;
+    /* Slightly darker pastel blue */
+    color: #004080;
 }
 
-
-.header div.setup {
-    background-color: #e0f7fa;
-}
-
-.header .username {
-    font-size: 20px;
-    font-weight: bold;
-    color: #333;
-}
-
+/* ===========================
+   Balance Section
+   =========================== */
 .balance {
     display: flex;
     justify-content: space-between;
-    margin: 20px 0;
-    font-size: 20px;
+    align-items: center;
+    margin: 10px;
+    font-size: 16px;
     font-weight: bold;
 }
 
 .balance div {
     text-align: center;
-    padding: 15px;
-    border-radius: 20px;
+    padding: 10px;
+    border-radius: 15px;
     background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #004080;
+    width: 100px;
+    /* Added fixed width */
+    height: 80px;
+    /* Added fixed height */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-/* Record Section Styling */
+.balance img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2),
+        inset 0 -3px 6px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+    transition: transform 0.3s ease;
+}
+
+.balance img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3),
+        inset 0 -4px 8px rgba(255, 255, 255, 0.6);
+}
+
+/* For very small screens */
+@media screen and (max-width: 360px) {
+    .balance {
+        font-size: 14px;
+    }
+
+    .balance img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .balance div {
+        width: 80px;
+        /* Smaller width for mobile */
+        height: 70px;
+        /* Smaller height for mobile */
+        padding: 8px;
+    }
+}
+/* Expenses and Income Colors */
+.totalExpenses p {
+    color: #e57373;
+    /* Pastel red */
+}
+
+.totalIncome p {
+    color: #81c784;
+    /* Pastel green */
+}
+
+/* ===========================
+   Records Section
+   =========================== */
 .records {
     background-color: #ffffff;
+    /* White for contrast */
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
@@ -72,10 +147,12 @@ body {
 .records h3 {
     font-size: 20px;
     margin-bottom: 15px;
-    color: #333;
+    color: #004080;
 }
 
-/* Updated Record Item Styling */
+/* ===========================
+   Record Item Styling
+   =========================== */
 .record-item {
     display: flex;
     flex-direction: column;
@@ -83,10 +160,12 @@ body {
     align-items: flex-start;
     margin-bottom: 15px;
     padding: 15px;
-    border: 1px solid #ddd;
+    border: 1px solid #bbdefb;
+    /* Light blue border */
     border-radius: 10px;
     position: relative;
-    background-color: #fafafa;
+    background-color: #f9f9f9;
+    /* Off-white background */
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
     width: 100%;
     box-sizing: border-box;
@@ -107,47 +186,185 @@ body {
 .record-day {
     font-size: 15px;
     font-weight: bold;
-    color: #333;
-
+    color: #004080;
 }
 
+/* ===========================
+   Compact Navigation Bar
+   =========================== */
+.nav-icons {
+    position: fixed;
+    top: 20%;
+    left: -220px;
+    /* Increased to ensure full text visibility */
+    width: 220px;
+    /* Increased width */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: left 0.3s ease;
+    z-index: 999;
+}
 
+.nav-icons.open {
+    left: 10px;
+}
 
+.nav-icons a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    width: 200px;
+    /* Increased width */
+    position: relative;
+    /* Added for absolute positioning of text */
+}
+
+.nav-icons a:hover {
+    background-color: #bbdefb;
+    transform: scale(1.05);
+}
+
+.nav-icons a img {
+    width: 25px;
+    height: 25px;
+    filter: brightness(0.8);
+    margin-right: 15px;
+}
+
+/* Modified text display */
+.nav-icons a::after {
+    content: attr(title);
+    color: #004080;
+    font-size: 14px;
+    font-weight: 500;
+    position: absolute;
+    left: 60px;
+    /* Position after the icon */
+    white-space: nowrap;
+    overflow: visible;
+}
+
+/* Toggle Button */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    color: #004080;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* For mobile screens */
+@media screen and (max-width: 360px) {
+    .nav-icons {
+        left: -200px;
+        width: 200px;
+    }
+
+    .nav-icons a {
+        width: 180px;
+        padding: 8px 12px;
+    }
+
+    .nav-icons a::after {
+        font-size: 13px;
+        left: 50px;
+    }
+
+    .nav-icons a img {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+}
+
+/* ===========================
+   Add Expense Button
+   =========================== */
+.add-expense-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 10px;
+    background-color: #bbdefb;
+    /* Soft blue for harmony */
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+    transition: 0.3s ease, transform 0.3s ease;
+}
+
+.add-expense-btn:hover {
+    background-color: #90caf9;
+    /* Slightly darker pastel blue */
+    transform: scale(1.1);
+}
+
+.add-expense-btn img {
+    width: 35px;
+    height: 35px;
+}
+
+/* ===========================
+   Utility Classes for Details
+   =========================== */
 .details {
     display: flex;
     align-items: center;
     width: 100%;
+    margin-bottom: 10px;
+}
 
+.details img {
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     margin-right: 15px;
+    border: 2px solid #bbdefb;
+    /* Blue border for harmony */
 }
 
 .category {
     font-size: 16px;
     font-weight: 600;
-    color: #333;
+    color: #004080;
 }
 
 .amount {
     font-size: 16px;
     font-weight: bold;
-    color: #333;
+    color: #004080;
     position: absolute;
     top: 15px;
     right: 15px;
 }
 
 .amount.red {
+    color: #e57373;
+    /* Pastel red for expenses */
+}
 
+.amount.green {
+    color: #81c784;
+    /* Pastel green for income */
 }
 
 .remark {
     font-size: 14px;
-    color: #777;
+    color: #004080;
     margin-top: 5px;
 }
 
-
+/* ===========================
+   Buttons Section
+   =========================== */
 .buttons {
     display: flex;
     gap: 10px;
@@ -156,13 +373,15 @@ body {
     right: 15px;
 }
 
-
+.edit-btn,
+.delete-btn {
     cursor: pointer;
     padding: 5px 10px;
     font-size: 14px;
-    border: 1px solid #ccc;
+    border: 1px solid #bbdefb;
+    /* Blue border */
     border-radius: 5px;
-    transition: 0.3s ease;
+    transition: 0.3s ease, transform 0.3s ease;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -171,68 +390,23 @@ body {
 }
 
 .edit-btn {
-    background-color: #f39c12;
+    background-color: #90caf9;
     color: white;
 }
 
 .edit-btn:hover {
-    background-color: #e67e22;
+    background-color: #64b5f6;
+    /* Darker blue for hover */
+    transform: scale(1.1);
 }
 
 .delete-btn {
-    background-color: #fae3e0;
+    background-color: #ef9a9a;
     color: white;
 }
 
-.delete-btn img {
-    border-radius: 50%;
-    width: 20px;
-    height: 20px;
-}
-
 .delete-btn:hover {
-    background-color: #c0392b;
-}
-
-/* Footer Styling */
-.footer {
-    display: flex;
-    justify-content: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 30px;
-    background-color: #ffffff;
-    padding: 15px 0;
-    border-top: 1px solid #ddd;
-    border-radius: 30px;
-    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
-    align-items: center;
-}
-
-.footer img {
-    width: 50px;
-    height: 50px;
-    margin-right: 50px;
-
-}
-
-.add-expense-btn {
-    position: fixed;
-
-    background-color: #c7e8f5;
-    border-radius: 50%;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-
-    transition: 0.3s ease;
-}
-
-.add-expense-btn:hover {
-    background-color: #e67e22;
-}
-
-.add-expense-btn img {
-    width: 35px;
-    height: 35px;
+    background-color: #e57373;
+    /* Darker pastel red */
+    transform: scale(1.1);
 }

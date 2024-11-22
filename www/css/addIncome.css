@@ -4,15 +4,16 @@ html,
 body {
     font-family: Arial, sans-serif;
     height: 100%;
-    background-color: #fef0e5;
+    background-color: #E6F3FF;
+    /* Light pastel blue background */
     color: #333;
-    overflow: hidden; /* Prevent page scrolling */
+    overflow: hidden;
 }
 
 .container {
     display: flex;
     flex-direction: column;
-    height: 100%; /* Full height of viewport */
+    height: 100%;
 }
 
 .header {
@@ -20,16 +21,24 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 10px 15px;
-    background-color: #f9f5ec;
-    flex-shrink: 0; /* Ensure header does not shrink */
+    background-color: #CCE6FF;
+    /* Lighter blue for header */
+    flex-shrink: 0;
 }
 
 .header button {
-    background-color: #f1d1b3;
+    background-color: #99C2FF;
+    /* Medium pastel blue */
     border: none;
     border-radius: 10px;
     padding: 10px;
     font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.header button:hover {
+    background-color: #80B3FF;
+    /* Slightly darker on hover */
 }
 
 .category-tabs {
@@ -38,27 +47,35 @@ body {
 }
 
 .category-tabs button {
-    background-color: #f9f5ec;
+    background-color: #D6E9FF;
+    /* Very light blue */
     border: none;
     padding: 5px 10px;
     border-radius: 15px;
     font-size: 14px;
     color: #555;
+    transition: background-color 0.3s;
+}
+
+.category-tabs button:hover {
+    background-color: #B3D1FF;
+    /* Slightly darker on hover */
 }
 
 .categories {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Responsive grid */
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     gap: 10px;
     padding: 10px;
-    overflow-y: auto; /* Enable scrolling */
-    flex-grow: 1; /* Take remaining space after header and footer */
+    overflow-y: auto;
+    flex-grow: 1;
     width: 100%;
-   max-height: 280px;
+    max-height: 280px;
 }
 
 .category-item button {
-    background-color: #f9e1c6;
+    background-color: #B3D9FF;
+    /* Soft pastel blue */
     border-radius: 20px;
     padding: 10px;
     display: flex;
@@ -68,20 +85,27 @@ body {
     font-size: 12px;
     font-weight: bold;
     text-align: center;
-    border: 1px solid #ddd;
+    border: 1px solid #CCE0FF;
+    /* Light blue border */
     cursor: pointer;
-    aspect-ratio: 1; /* Square buttons */
+    aspect-ratio: 1;
     min-width: 80px;
     max-width: 120px;
+    transition: all 0.3s ease;
 }
+
 .category-item button.active {
-    background-color: #007BFF; /* Blue color for active button */
+    background-color: #4D94FF;
+    /* Brighter blue for active state */
     color: white;
 }
 
 .category-item button:hover {
-    background-color: #ddd;
+    background-color: #99C2FF;
+    /* Medium pastel blue on hover */
+    transform: translateY(-2px);
 }
+
 .category-item img {
     width: 50%;
     height: auto;
@@ -89,15 +113,17 @@ body {
 }
 
 .footer {
-    background-color: #f6e8d5;
+    background-color: #CCE6FF;
+    /* Light pastel blue footer */
     padding: 10px;
-    border-top: 1px solid #ddd;
-    position: fixed; /* Fixed at the bottom */
+    border-top: 1px solid #B3D9FF;
+    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;
     width: 100%;
-    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 -2px 5px rgba(179, 217, 255, 0.3);
+    /* Soft blue shadow */
 }
 
 .input-fields {
@@ -109,23 +135,23 @@ body {
 .input-fields input {
     flex: 1;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #B3D9FF;
+    /* Light blue border */
     border-radius: 10px;
     font-size: 14px;
+    background-color: #F0F8FF;
+    /* Very light blue background */
 }
 
 #incomeDate {
     margin-bottom: 10px;
-}
-
-#incomeDate {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #B3D9FF;
     border-radius: 10px;
     font-size: 14px;
+    background-color: #F0F8FF;
 }
-
 
 .calculator {
     display: grid;
@@ -134,7 +160,8 @@ body {
 }
 
 .calculator button {
-    background-color: #f1d1b3;
+    background-color: #99C2FF;
+    /* Medium pastel blue */
     border: none;
     border-radius: 15px;
     padding: 10px;
@@ -142,4 +169,23 @@ body {
     font-weight: bold;
     color: #333;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.calculator button:hover {
+    background-color: #80B3FF;
+    transform: translateY(-1px);
+}
+
+/* Add some subtle animations for interactive elements */
+.header button,
+.category-tabs button,
+.calculator button {
+    transition: transform 0.2s ease, background-color 0.3s ease;
+}
+
+.header button:active,
+.category-tabs button:active,
+.calculator button:active {
+    transform: scale(0.95);
 }

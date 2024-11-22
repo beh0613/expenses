@@ -80,6 +80,28 @@ h2 {
     text-align: left;
 }
 
+#loginForm button {
+    width: 100%;
+    background-color: #87c6f9;
+    color: #ffffff;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.3s;
+    cursor: pointer;
+    font-family: 'Lobster', cursive;
+}
+
+#loginForm button:hover {
+    background-color: #70aedd;
+}
+
+#loginForm button:active {
+    transform: scale(0.95);
+}
+
 label {
     color: #333333;
     font-weight: bold;
@@ -140,4 +162,144 @@ input:focus {
 
 .info-text a:hover {
     text-decoration: underline;
+}
+
+/* Password visibility toggle styling */
+.password-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 8px;
+    color: #5fa8d9;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.toggle-password:hover {
+    color: #3e90c1;
+}
+
+/* Adjust password input to accommodate the toggle button */
+.password-container input {
+    padding-right: 40px;
+    width: 100%;
+}
+
+/* Hidden Element */
+.hidden {
+    display: none;
+}
+
+/* Message Styling */
+.message {
+    padding: 12px;
+    margin: 15px 0;
+    border-radius: 10px;
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+/* Success Message */
+.success {
+    background-color: #e8f6f0;
+    color: #2a9d8f;
+    border: 1px solid #b2e4dc;
+}
+
+/* Error Message */
+.error {
+    background-color: #ffedf0;
+    color: #e76f51;
+    border: 1px solid #ffd1d9;
+}
+
+/* Change Username Link */
+.change-username-link {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.change-username-link a {
+    color: #5fa8d9;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.change-username-link a:hover {
+    color: #3e90c1;
+    text-decoration: underline;
+}
+
+/* Change Username Section */
+#changeUsernameSection {
+    margin-top: 25px;
+    padding: 20px;
+    background-color: #f9fcff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* Change Username Form */
+#changeUsernameForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#changeUsernameForm input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cfe0f6;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: #f9fcff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+#changeUsernameForm input:focus {
+    outline: none;
+    border-color: #5fa8d9;
+    box-shadow: 0 0 5px rgba(95, 168, 217, 0.3);
+}
+
+#changeUsernameForm button {
+    width: 100%;
+    background-color: #87c6f9;
+    color: #ffffff;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.3s;
+    cursor: pointer;
+    font-family: 'Lobster', cursive;
+}
+
+#changeUsernameForm button:hover {
+    background-color: #70aedd;
+}
+
+#changeUsernameForm button:active {
+    transform: scale(0.95);
+}
+
+/* Cancel Button */
+#cancelChange {
+    background-color: #ffd1d9 !important;
+}
+
+#cancelChange:hover {
+    background-color: #ffb3c0 !important;
 }
