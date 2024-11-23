@@ -2,10 +2,24 @@ function toggleMenu() {
     const nav = document.querySelector('.nav-icons');
     nav.classList.toggle('open');
 }
+
+function checkExpensesOnSummaryClick(event) {
+    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    if (expenses.length === 0) {
+        event.preventDefault(); // Prevent navigating to the summary page
+        alert("No expenses recorded. Please add your expenses.");
+    }
+}
+
 window.onload = function () {
     displayRecords();
     calculateTotals();
     displayUsername();
+
+    const summaryNavBar = document.getElementById('summaryNavBar');
+    if (summaryNavBar) {
+        summaryNavBar.addEventListener('click', checkExpensesOnSummaryClick);
+    }
 };
 
 function displayUsername() {
