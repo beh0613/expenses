@@ -116,6 +116,13 @@ function asset() {
         text.textContent = asset.name;
         text.style.flexGrow = "1";
 
+        const amount = calculateAssetAmount(asset.name);
+        const amountSpan = document.createElement('span');
+        amountSpan.textContent = ` (RM${amount})`;
+        amountSpan.style.marginLeft = "5px";
+        amountSpan.style.color = "gray";
+
+
         // Add a "Select" button for each asset
         const selectButton = document.createElement('button');
         selectButton.textContent = "Select";
@@ -132,11 +139,13 @@ function asset() {
             alert(`You selected: ${asset.name}`);
             // Store the selected asset in localStorage or use it in the next step (income/expense handling)
             localStorage.setItem('selectedAsset', asset.name);
+            localStorage.setItem('selectedAssetIcon', asset.icon); // Save icon path
             document.body.removeChild(assetContainer); // Close modal
         });
 
         item.appendChild(img);
         item.appendChild(text);
+        item.appendChild(amountSpan);
         item.appendChild(selectButton);
         assetContainer.appendChild(item);
     });
@@ -163,6 +172,35 @@ function asset() {
     document.body.appendChild(assetContainer);
 }
 
+//New
+function calculateAssetAmount(assetName) {
+    const incomes = JSON.parse(localStorage.getItem('incomes')) || [];
+    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    const assetAmounts = calculateAssetAmounts(incomes, expenses);
+
+    return assetAmounts[assetName] || 0; // Return the calculated amount or 0 if not found
+}
+function calculateAssetAmounts(incomes, expenses) {
+    const assetAmounts = {};
+
+    incomes.forEach(record => {
+        const { asset, amountIncome } = record;
+        if (asset) {
+            if (!assetAmounts[asset]) assetAmounts[asset] = 0;
+            assetAmounts[asset] += amountIncome || 0;
+        }
+    });
+
+    expenses.forEach(record => {
+        const { asset, amount } = record;
+        if (asset) {
+            if (!assetAmounts[asset]) assetAmounts[asset] = 0;
+            assetAmounts[asset] -= amount || 0;
+        }
+    });
+
+    return assetAmounts;
+}
 
 
 function quickAdd_save() {
@@ -175,7 +213,9 @@ function quickAdd_save() {
     const amount = parseFloat(document.getElementById('amount').value);
     const remark = document.getElementById('remark').value;
     const dateInput = document.getElementById('expenseDate').value;
-    const expenseDate = dateInput ? new Date(dateInput) : null; // Don't override the date if not changed
+    
+    // Parse the date with moment.js
+    const expenseDate = dateInput ? moment(dateInput, 'YYYY-MM-DD').toDate() : null; // If date is provided, convert to Date object
 
     if (isNaN(amount) || amount <= 0) {
         alert("Please enter a valid amount!");
@@ -211,7 +251,7 @@ function quickAdd_save() {
 
         // Update the date only if it's provided (not null)
         if (expenseDate) {
-            expenseRecord.date = expenseDate.toLocaleString();  // If date is provided, update it
+            expenseRecord.date = moment(expenseDate).toISOString(); // Use moment.js for consistent date format
         }
 
         // Ensure asset is updated (if applicable)
@@ -227,11 +267,13 @@ function quickAdd_save() {
         expenseRecord = {
             category: selectedCategory.name,
             icon: selectedCategory.icon,
+            asset: selectedAsset,
+            assetIcon: localStorage.getItem('selectedAssetIcon'), // Include the asset icon
             amount,
-            remark,
-            date: expenseDate ? expenseDate.toLocaleString() : new Date().toLocaleString(),
-            asset: selectedAsset, // Store asset type
+            date: moment(expenseDate).toISOString(), // Use moment.js for the date format
+            remark
         };
+
         records.push(expenseRecord);
     }
 
@@ -240,6 +282,7 @@ function quickAdd_save() {
     alert("Expense saved!");
     equalsPressed = false;  // Reset equalsPressed after saving
 }
+
 
 function quickAdd() {
     quickAdd_save();
@@ -275,7 +318,8 @@ function save() {
         amount,
         remark,
         date: new Date(expenseDate),
-        asset: localStorage.getItem('selectedAsset') // Store the selected asset
+        asset: localStorage.getItem('selectedAsset'), // Store the selected asset
+        assetIcon:localStorage.setItem('selectedAssetIcon', asset.icon) // Save icon path
     };
 
     let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
@@ -318,11 +362,11 @@ window.onload = function () {
 function setDefaultDate() {
     const dateInput = document.getElementById('expenseDate');
     if (!dateInput.value) { // Only set the default if no value is already set
-        const today = new Date();
-        const formattedDate = today.toISOString().split('T')[0]; // Format: yyyy-mm-dd
-        dateInput.value = formattedDate;
+        const today = moment().format('YYYY-MM-DD'); // Using moment.js to get the current date
+        dateInput.value = today;
     }
 }
+
 
 function loadRecordForEditing() {
     const editRecordIndex = localStorage.getItem('editRecordIndex');
@@ -336,14 +380,17 @@ function loadRecordForEditing() {
             // Set the form fields with the current record data
             document.getElementById('amount').value = record.amount;
             document.getElementById('remark').value = record.remark;
-            const date = new Date(record.date);
-            document.getElementById('expenseDate').value = date.toISOString().split('T')[0]; // Set date input to yyyy-mm-dd format
+
+            // Format the date using moment.js
+            const date = moment(record.date).format('YYYY-MM-DD'); // Format to 'yyyy-mm-dd'
+            document.getElementById('expenseDate').value = date;
 
             // Preserve the selected category
             selectCategoryByName(record.category, record.icon); // This will highlight the existing category button
         }
     }
 }
+
 
 function selectCategoryByName(name, icon) {
     // Find all category buttons

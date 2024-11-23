@@ -12,6 +12,7 @@ function checkExpensesOnSummaryClick(event) {
 }
 
 window.onload = function () {
+    ensureDefaultAssetIcons();
     displayRecords();
     calculateTotals();
     displayUsername();
@@ -22,6 +23,16 @@ window.onload = function () {
     }
 };
 
+function ensureDefaultAssetIcons() {
+    const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    expenses.forEach(expense => {
+        if (!expense.assetIcon) {
+            expense.assetIcon = 'path/to/default-asset-icon.png'; // Add a default asset icon
+        }
+    });
+    localStorage.setItem('expenses', JSON.stringify(expenses));
+}
+
 function displayUsername() {
     const username = localStorage.getItem('currentUser');
     if (username) {
@@ -31,25 +42,37 @@ function displayUsername() {
 
 function displayRecords() {
     const recordsContainer = document.getElementById('recordsContainer');
+    if (!recordsContainer) {
+        console.error("Element with id 'recordsContainer' not found.");
+        return;
+    }
+
     recordsContainer.innerHTML = ''; // Clear previous records
 
     const incomes = JSON.parse(localStorage.getItem('incomes')) || [];
     const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
+    console.log('Incomes:', incomes);
+    console.log('Expenses:', expenses);
 
     const allRecords = [
         ...incomes.map((record, index) => ({ ...record, type: 'income', index })),
         ...expenses.map((record, index) => ({ ...record, type: 'expense', index }))
     ];
 
-    // Sort records by date (descending)
     allRecords.sort((a, b) => new Date(b.date) - new Date(a.date));
+    console.log('All Records:', allRecords);
+
+    if (allRecords.length === 0) {
+        console.warn("No records to display.");
+        recordsContainer.innerHTML = '<p>No records found.</p>';
+        return;
+    }
 
     let currentDate = null;
 
     allRecords.forEach((record) => {
         const fullDate = new Date(record.date).toLocaleDateString();
 
-        // Add a date header if the date changes
         if (fullDate !== currentDate) {
             currentDate = fullDate;
             const dateHeader = document.createElement('div');
@@ -58,30 +81,33 @@ function displayRecords() {
             recordsContainer.appendChild(dateHeader);
         }
 
-        // Create the record item
         const recordDiv = document.createElement('div');
         recordDiv.className = 'record-item';
         recordDiv.innerHTML = `
-                    <div class="details">
-                        <img src="${record.icon || 'path/to/default-icon.png'}" alt="${record.category}" class="category-icon">
-                        <span class="category">${record.category}</span>
-                    </div>
-                    <span class="amount ${record.type === 'income' ? 'green' : 'red'}">
-                        ${record.type === 'income' ? '+' : '-'} ${parseFloat(record.amountIncome || record.amount).toFixed(2)}
-                    </span>
-                    <span class="remark">${record.remarkIncome || record.remark || ''}</span>
-                    <div class="buttons">
-                        <button class="edit-btn" onclick="editRecord(${record.index}, ${record.type === 'expense'})">
-                            <img src="image/edit.gif" alt="Edit" width="30px" height="30px">
-                        </button>
-                        <button class="delete-btn" onclick="deleteRecord(${record.index}, ${record.type === 'expense'})">
-                            <img src="image/delete.gif" alt="Delete" width="30px" height="30px">
-                        </button>
-                    </div>
-                `;
+        <div class="details">
+            <img src="${record.icon || 'path/to/default-icon.png'}" alt="${record.category}" class="category-icon">
+            <span class="category">${record.category}</span>
+        </div>
+        <span class="amount ${record.type === 'income' ? 'green' : 'red'}">
+            ${record.type === 'income' ? '+' : '-'} ${parseFloat(record.amountIncome || record.amount || 0).toFixed(2)}
+        </span>
+        <span class="remark">${record.remarkIncome || record.remark || ''}</span>
+        <div class="buttons">
+            <button class="edit-btn" onclick="editRecord(${record.index}, ${record.type === 'expense'})">
+                <img src="image/edit.gif" alt="Edit" width="30px" height="30px">
+            </button>
+            <button class="delete-btn" onclick="deleteRecord(${record.index}, ${record.type === 'expense'})">
+                <img src="image/delete.gif" alt="Delete" width="30px" height="30px">
+            </button>
+        </div>
+    `;
+    
+    
         recordsContainer.appendChild(recordDiv);
     });
 }
+
+
 
 function editRecord(index, isExpense) {
     const key = isExpense ? "expenses" : "incomes";
@@ -101,6 +127,7 @@ function addNewExpense() {
     document.getElementById('remarkExpense').value = '';
     document.getElementById('expenseDate').value = '';
     document.getElementById('categoryIcon').src = '';
+    document.getElementById('categoryIcon').src || 'path/to/default-asset-icon.png'; // Default if missing
 }
 
 function addNewIncome() {

@@ -18,9 +18,15 @@ function selectCategory(event, name, icon) {
     event.target.classList.add('selected'); // Highlight current selection
     event.target.style.backgroundColor = "lightblue"; // Set color to blue when selected
 }
+window.onload = function() {
+    document.getElementById("assetButton").addEventListener("click", IncomeAsset);
+    console.log("Button clicked!");
+};
 
 
-function asset() {
+function asset(){
+    console.log("Asset button clicked"); // Add this log to check if the function is being called
+
     const assets = [
         { name: 'Cash', icon: 'image/incomeCash.png' },
         { name: 'Ewallet', icon: 'image/ewallet.png' },
@@ -28,8 +34,7 @@ function asset() {
     ];
 
     // Create a container to display the assets
-    const assetContainer = document.createElement('div');
-    assetContainer.style.position = "fixed";
+    const assetContainer = document.createElement('div');    assetContainer.style.position = "fixed";
     assetContainer.style.top = "50%";
     assetContainer.style.left = "50%";
     assetContainer.style.transform = "translate(-50%, -50%)";
@@ -65,6 +70,13 @@ function asset() {
         text.textContent = asset.name;
         text.style.flexGrow = "1";
 
+        const amount = calculateAssetAmount(asset.name);
+        const amountSpan = document.createElement('span');
+        amountSpan.textContent = ` (RM${amount})`;
+        amountSpan.style.marginLeft = "5px";
+        amountSpan.style.color = "gray";
+
+
         // Add a "Select" button for each asset
         const selectButton = document.createElement('button');
         selectButton.textContent = "Select";
@@ -81,11 +93,13 @@ function asset() {
             alert(`You selected: ${asset.name}`);
             // Store the selected asset in localStorage or use it in the next step (income/expense handling)
             localStorage.setItem('selectedAsset', asset.name);
+            localStorage.setItem('selectedAssetIcon', asset.icon); // Save icon path
             document.body.removeChild(assetContainer); // Close modal
         });
 
         item.appendChild(img);
         item.appendChild(text);
+        item.appendChild(amountSpan);
         item.appendChild(selectButton);
         assetContainer.appendChild(item);
     });
@@ -110,6 +124,32 @@ function asset() {
 
     // Append container to the body
     document.body.appendChild(assetContainer);
+}
+
+
+function calculateAssetAmounts(incomes, expenses) {
+    const assetAmounts = {};
+    
+    // Example: Calculate amounts for different asset types based on incomes and expenses
+    incomes.forEach(income => {
+        if (income.asset && !assetAmounts[income.asset]) {
+            assetAmounts[income.asset] = 0;
+        }
+        if (income.asset) {
+            assetAmounts[income.asset] += income.amount; // Example calculation
+        }
+    });
+    
+    expenses.forEach(expense => {
+        if (expense.asset && !assetAmounts[expense.asset]) {
+            assetAmounts[expense.asset] = 0;
+        }
+        if (expense.asset) {
+            assetAmounts[expense.asset] -= expense.amount; // Example calculation
+        }
+    });
+    
+    return assetAmounts;
 }
 
 
@@ -187,7 +227,9 @@ function loadIncomeRecordForEditing(index) {
     previousAmount = parseFloat(record.amountIncome); // Store the previous amount
 
     document.getElementById('remarkIncome').value = record.remarkIncome;
-    document.getElementById('incomeDate').value = new Date(record.date).toISOString().split('T')[0]; // Format date as YYYY-MM-DD
+
+    // Use moment.js to format the date
+    document.getElementById('incomeDate').value = moment(record.date).format('YYYY-MM-DD'); // Format date as YYYY-MM-DD
 
     // Set the selected category (based on the stored category name)
     selectedCategory = { name: record.category, icon: record.icon };
@@ -199,7 +241,6 @@ function loadIncomeRecordForEditing(index) {
         document.getElementById('categoryIcon').src = iconPath;  // Set the image source to the icon URL
     }
 }
-
 
 
 function highlightCategoryButton(categoryName) {
@@ -299,8 +340,8 @@ function saveIncome() {
     // Use the selected asset or default to 'Cash'
     const selectedAsset = localStorage.getItem('selectedAsset') || 'Cash';
 
-    // Use the selected date or default to today's date in YYYY-MM-DD format
-    const incomeDate = document.getElementById('incomeDate').value || new Date().toISOString().split('T')[0];
+    // Use moment.js to get the selected date or default to today's date
+    const incomeDate = document.getElementById('incomeDate').value || moment().format('YYYY-MM-DD');
 
     // Create the income record
     const incomeRecord = {
@@ -308,7 +349,7 @@ function saveIncome() {
         icon: selectedCategory.icon,
         amountIncome,
         remarkIncome,
-        date: incomeDate,
+        date: incomeDate,  // Store formatted date
         asset: selectedAsset, // Store asset type
     };
 
@@ -338,7 +379,6 @@ function saveIncome() {
     alert("Income added successfully!");
     resetFields();
     window.location.href = 'record.html'; // Navigate to the records page
-
 }
 
 

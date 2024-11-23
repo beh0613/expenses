@@ -1,5 +1,3 @@
-
-
 html,
 body {
     font-family: Arial, sans-serif;
@@ -112,6 +110,49 @@ body {
     margin-bottom: 5px;
 }
 
+.section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin: 20px 0;
+    }
+
+    .button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 80%;
+    }
+
+    .button span {
+      margin-left: 10px;
+      font-size: 16px;
+    }
+
+    .arrow {
+      font-size: 20px;
+    }
+
+    .input-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .input-box {
+      padding: 10px;
+      background-color: #f7f2e6;
+      border-radius: 8px;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
+
 .footer {
     background-color: #CCE6FF;
     /* Light pastel blue footer */
@@ -157,13 +198,6 @@ body {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     gap: 10px;
-}
-.asset-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 9999; /* Make sure it's on top */
 }
 
 .calculator button {
