@@ -180,6 +180,7 @@ function calculateAssetAmount(assetName) {
 
     return assetAmounts[assetName] || 0; // Return the calculated amount or 0 if not found
 }
+
 function calculateAssetAmounts(incomes, expenses) {
     const assetAmounts = {};
 
