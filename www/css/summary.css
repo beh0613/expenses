@@ -349,3 +349,21 @@ canvas {
     }
 }
 
+.category-detail-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.category-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    border-radius: 5px;
+}
+
+.category-name {
+    font-weight: bold;
+    margin-right: auto;
+}
+
