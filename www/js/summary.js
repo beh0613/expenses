@@ -506,6 +506,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     function updateMonthlyDetails(selectedYear, selectedMonth, noData = false) {
+        const categoryExpensesContainer = document.getElementById("category-expenses");
+        const totalExpensesAmount = document.getElementById("total-expenses-amount");
         categoryExpensesContainer.innerHTML = "";
 
         if (noData) {
@@ -517,6 +519,29 @@ document.addEventListener("DOMContentLoaded", () => {
             `;
             return;
         }
+
+        const categoryIcons = {
+            "Food": "image/iconFood.png",
+            "Fruits": "image/iconFruits.png",
+            "Drink": "image/iconDrink.png",
+            "Dessert": "image/iconDessert.png",
+            "Car": "image/iconCar.png",
+            "Bus": "image/iconBus.png",
+            "Clothes": "image/iconClothes.png",
+            "Cosmetic": "image/iconComestic.png",
+            "Delivery": "image/iconDelivery.png",
+            "Fuel": "image/iconFuel.png",
+            "Game": "image/iconGame.png",
+            "Medical": "image/iconMedical.png",
+            "Pet": "image/iconPet.png",
+            "Restaurant": "image/iconRestaurant.png",
+            "Shopping": "image/iconShopping.png",
+            "Sport": "image/iconSport.png",
+            "Tool": "image/iconTool.png",
+            "Travel": "image/iconTravel.png",
+            "Vegetable": "image/iconVegetable.png",
+            "Other": "image/defaultIcon.png" // Default icon
+        };
 
         const categoryTotals = {};
         let total = 0;
@@ -532,8 +557,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         Object.entries(categoryTotals).forEach(([category, amount]) => {
             const percentage = ((amount / total) * 100).toFixed(2); // Calculate percentage
+            const icon = categoryIcons[category] || categoryIcons["Other"]; // Fallback to default icon
             const listItem = document.createElement("li");
+            listItem.className = "category-detail-item";
             listItem.innerHTML = `
+            <img src="${icon}" alt="${category}" class="category-icon">
             <span class="category-name">${category}</span>: RM${amount.toFixed(2)} 
             (<strong>${percentage}%</strong>)
         `;
