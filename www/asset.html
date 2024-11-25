@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <title>Asset Management</title>
+    <link rel="stylesheet" href="css/asset.css">
+    <link rel="stylesheet" href="js/asset.js">
+
+</head>
+
+<body>
+   
+    <div class="nav-icons">
+        <a href="login.html?change=true" id="usernameLink" title="Username"><img src="image/profilePic8.gif" alt="Username">Username</a>
+        <a href="profilepic.html" title="profilePic"><img src="image/profileIcon.gif" alt="profilePic" >Profile Picture</a>
+        <a href="record.html" title="Record"><img src="image/record.gif" alt="Record" >Record</a>
+        <a id="summaryNavBar" href="summary.html" title="Summary"><img src="image/summary.png" alt="Summary">Summary</a>
+        <a href="budget.html" title="Budget"><img src="image/budgeting.gif" alt="Budget">Budget</a>
+        <a href="asset.html" title="Asset"><img src="image/assetIcon.gif" alt="Asset">Asset</a>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+
+    <img src="image/penguin.png" id="imageAsset"> 
+    <h2>Asset Management</h2>
+    <div class="asset-container">
+        <!-- Cash Asset -->
+        <div class="asset-box" id="cashAsset">
+            <img src="image/incomeCash.png" alt="Cash">
+            <h3>Cash</h3>
+            <p class="asset-total" id="cashTotal">Total: $0</p>
+            <button class="view-transactions-btn" onclick="showTransactions('Cash')">View Transactions</button>
+            <div class="transaction-list" id="cashTransactions"></div>
+        </div>
+
+        <!-- Ewallet Asset -->
+        <div class="asset-box" id="ewalletAsset">
+            <img src="image/ewallet.png" alt="Ewallet">
+            <h3>Ewallet</h3>
+            <p class="asset-total" id="ewalletTotal">Total: $0</p>
+            <button class="view-transactions-btn" onclick="showTransactions('Ewallet')">View Transactions</button>
+            <div class="transaction-list" id="ewalletTransactions"></div>
+        </div>
+
+        <!-- Card Asset -->
+        <div class="asset-box" id="cardAsset">
+            <img src="image/bankCard.png" alt="Card Number">
+            <h3>Card Number</h3>
+            <p class="asset-total" id="cardTotal">Total: $0</p>
+            <button class="view-transactions-btn" onclick="showTransactions('CardNumber')">View Transactions</button>
+            <div class="transaction-list" id="cardTransactions"></div>
+        </div>
+    </div>
+    <script src="js/asset.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+

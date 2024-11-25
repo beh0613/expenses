@@ -1,0 +1,222 @@
+body {
+    font-family: 'Comic Sans MS', 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #eef7fa;
+    /* Pastel blue background */
+    color: #33475b;
+    /* Soft dark blue for text */
+}
+
+/* Navigation Bar */
+.nav-icons {
+    position: fixed;
+    top: 20%;
+    left: -220px;
+    /* Hidden by default */
+    width: 220px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    transition: left 0.3s ease;
+    z-index: 999;
+}
+
+.nav-icons.open {
+    left: 10px;
+}
+
+.nav-icons a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    width: 200px;
+    color: #406882;
+    font-family: 'Comic Sans MS', 'Arial', sans-serif;
+    font-size: 14px;
+}
+
+.nav-icons a:hover {
+    background-color: #bbdefb;
+    transform: scale(1.05);
+}
+
+.nav-icons a img {
+    width: 25px;
+    height: 25px;
+    margin-right: 15px;
+}
+
+.nav-icons a span {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s, opacity 0.3s;
+    margin-left: 5px;
+    font-weight: bold;
+}
+
+.nav-icons a:hover span {
+    visibility: visible;
+    opacity: 1;
+}
+
+.nav-title {
+    visibility: hidden;
+    opacity: 0;
+    margin-left: 10px;
+    transition: visibility 0.3s, opacity 0.3s;
+    font-weight: bold;
+    color: #406882;
+    font-size: 14px;
+}
+
+/* When the navigation is open, titles are visible */
+.nav-icons.open .nav-title {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Toggle Button */
+.menu-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    color: #004080;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+    /* Styling for the penguin image (imageAsset) */
+    #imageAsset {
+        display: block;
+        margin: 50px auto 20px; /* Center the image and add spacing */
+        width: 120px; /* Set a reasonable size */
+        height: auto;
+        border-radius: 50%; /* Circular style */
+        border: 4px solid #4e79d4; /* Border with theme color */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        transition: transform 0.3s ease;
+    }
+
+    #imageAsset:hover {
+        transform: scale(1.1); /* Slight zoom on hover */
+    }
+
+    /* Styling for the h2 header */
+    h2 {
+        text-align: center;
+        font-size: 2.5rem; /* Large, bold text */
+        font-weight: bold;
+        color: #4e79d4; /* Theme color */
+        margin-top: 10px;
+        margin-bottom: 30px;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2); /* Add depth */
+        font-family: 'Quicksand', sans-serif; /* Match font with page style */
+    }
+
+    h2::after {
+        content: "";
+        display: block;
+        margin: 10px auto;
+        width: 80px;
+        height: 4px;
+        background: #639df7; /* Accent color */
+        border-radius: 2px; /* Rounded line */
+    }
+
+.container{
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-bottom: 5%;
+    align-content: center;
+}
+
+    
+    .asset-container {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        margin-top: 100px;
+        flex-wrap: wrap;
+        padding: 0 20px;
+    }
+
+    .asset-box {
+        background-color: #ffffff;
+        border-radius: 10px;
+        width: 280px;
+        padding: 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        position: relative;
+        margin-bottom: 30px;
+        transition: transform 0.3s ease;
+    }
+
+    .asset-box:hover {
+        transform: scale(1.05);
+    }
+
+    .asset-box img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 15px;
+    }
+
+    .asset-box h3 {
+        font-size: 22px;
+        color: #333;
+        margin-bottom: 20px;
+    }
+
+    .asset-total {
+        font-size: 18px;
+        margin-top: 20px;
+        font-weight: bold;
+    }
+
+    .view-transactions-btn {
+        background-color: #28a745;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .view-transactions-btn:hover {
+        background-color: #218838;
+    }
+
+    .transaction-list {
+        margin-top: 20px;
+        font-size: 14px;
+        color: #666;
+        text-align: left;
+    }
+
+    .transaction-item {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        border-bottom: 1px solid #f1f1f1;
+    }
+
+    .transaction-item span {
+        font-weight: bold;
+    }
+
+    .transaction-item.income {
+        color: green;
+    }
+
+    .transaction-item.expense {
+        color: red;
+    }

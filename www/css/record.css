@@ -1,10 +1,6 @@
-/* ===========================
-   General Reset and Base Styles
-   =========================== */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #e3f2fd;
-    /* Light pastel blue background */
+    background-color: #e3f2fd; /* Light pastel blue background */
     color: #333;
     margin: 0;
     padding: 0;
@@ -19,44 +15,53 @@ body {
    =========================== */
 .header {
     display: flex;
-    justify-content: flex-start;
     align-items: center;
-    margin-bottom: 20px;
-    position: relative;
+    justify-content: flex-start;
+    margin-top: 2px; /* Space from navbar */
+    margin-left: 25px;
+    padding: 10px;
+    background-color: #fff; /* White background for header */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    border-radius: 50px;  /* Smaller rounded corners for outside border */
+    border: 2px solid #83bdf8; /* Blue border around the entire header */
 }
 
 .header .username {
     font-size: 20px;
     font-weight: bold;
     color: #004080;
-    /* Dark blue text */
-    margin-left: 30px;
-    /* Adjusted for navigation icon */
+    margin-left: 20px;
     position: relative;
     z-index: 1;
-}
-
-.header div {
-    padding: 12px 20px;
-    background-color: #ffffff;
-    /* White for contrast */
-    border-radius: 15px;
     text-align: center;
-    font-size: 16px;
-    color: #333;
 }
 
-/* Subheader Section */
+/* Profile Image Styling */
+.profile-pic {
+    width: 100px;  /* Smaller size for profile image */
+    height: 100px; /* Equal height to match width */
+    border-radius: 50%; /* Circle shape */
+    object-fit: cover;
+    border: 2px solid #fff; /* White border around image */
+    margin-right: 25px; /* Space between the image and text */
+}
+
+/* Hover Effect for Profile Picture */
+.profile-pic:hover {
+    transform: scale(1.1); /* Slight zoom effect */
+    transition: transform 0.3s ease;
+}
+/* Styling for Subheader */
 .subheader {
-    justify-content: space-between;
-    margin-bottom: 20px;
-    padding: 15px;
-    border-radius: 15px;
+    margin-top: 30px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    padding: 20px;
     text-align: center;
-    font-size: 35px;
-    background-color: #bbdefb;
-    /* Slightly darker pastel blue */
-    color: #004080;
+    background-color: #f7f9fc; /* Soft background color */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 /* ===========================

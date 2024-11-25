@@ -2,6 +2,23 @@ function toggleMenu() {
     const nav = document.querySelector('.nav-icons');
     nav.classList.toggle('open');
 }
+//Profile pic
+// Retrieve the profile picture URL from localStorage
+const selectedImage = localStorage.getItem('selectedProfilePicture');
+
+// If an image was selected, display it beside the header
+if (selectedImage) {
+    const headerElement = document.querySelector('.header');
+    const profileImage = document.createElement('img');
+    profileImage.src = selectedImage;
+    profileImage.alt = 'User Profile Picture';
+    profileImage.style.width = '50px';
+    profileImage.style.height = '50px';
+    profileImage.style.borderRadius = '50%';
+    profileImage.style.marginLeft = '10px';
+
+    headerElement.appendChild(profileImage);
+}
 
 function checkExpensesOnSummaryClick(event) {
     const expenses = JSON.parse(localStorage.getItem('expenses')) || [];

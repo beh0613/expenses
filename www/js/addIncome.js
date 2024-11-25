@@ -47,12 +47,17 @@ function asset() {
     title.style.textAlign = "center";
     assetContainer.appendChild(title);
 
+    let selectedAssetButton = null;
+
     // Loop through the available assets
     assets.forEach(asset => {
         const item = document.createElement('div');
         item.style.display = "flex";
         item.style.alignItems = "center";
         item.style.marginBottom = "10px";
+        item.style.padding = "10px";
+        item.style.borderRadius = "8px";
+        item.style.transition = "background-color 0.3s ease";
 
         const img = document.createElement('img');
         img.src = asset.icon;
@@ -71,8 +76,6 @@ function asset() {
         amountSpan.style.marginLeft = "5px";
         amountSpan.style.color = "gray";
 
-       
-
         // Add a "Select" button for each asset
         const selectButton = document.createElement('button');
         selectButton.textContent = "Select";
@@ -83,20 +86,34 @@ function asset() {
         selectButton.style.padding = "5px";
         selectButton.style.borderRadius = "5px";
         selectButton.style.cursor = "pointer";
+        selectButton.style.transition = "background-color 0.3s ease";
 
         selectButton.addEventListener('click', () => {
             // Handle the action for selecting the asset for income or expense
             alert(`You selected: ${asset.name}`);
-            // Store the selected asset in localStorage or use it in the next step (income/expense handling)
+            
+            // Store the selected asset
             localStorage.setItem('selectedAsset', asset.name);
             localStorage.setItem('selectedAssetIcon', asset.icon); // Save icon path
-            document.body.removeChild(assetContainer); // Close modal
+
+            // Update the button's appearance
+            if (selectedAssetButton) {
+                selectedAssetButton.style.backgroundColor = "#007bff";
+                selectedAssetButton.textContent = "Select";
+            }
+            selectButton.style.backgroundColor = "#28a745"; // Green for selected
+            selectButton.textContent = "Selected";
+            selectedAssetButton = selectButton;
+
+            // Highlight the selected asset's container
+            const items = assetContainer.querySelectorAll('div');
+            items.forEach(i => i.style.backgroundColor = "#fff"); // Reset all
+            item.style.backgroundColor = "#e6ffe6"; // Highlight the selected one
         });
 
         item.appendChild(img);
         item.appendChild(text);
         item.appendChild(amountSpan);
-
         item.appendChild(selectButton);
         assetContainer.appendChild(item);
     });
@@ -183,6 +200,7 @@ function calculate() {
         amountField = result.toString();
         currentOperationValue = result;
         operation = null;
+        equalsPressed = true; // Mark that equals was pressed
         document.getElementById('amountIncome').value = amountField;
     } catch (error) {
         alert("Invalid calculation. Please correct your input.");
@@ -191,11 +209,12 @@ function calculate() {
 
 
 function setOperation(op) {
+    if (!amountField && previousAmount !== 0) {
+        // If no current amount but previousAmount exists (editing scenario)
+        amountField = previousAmount.toString();
+    }
+
     if (amountField) {
-        if (operation) {
-            // Store the current input value into previousAmount when the user presses the operation for the first time
-            previousAmount = parseFloat(amountField);
-        }
         // Append the operation to the existing field
         amountField += ` ${op} `;
         operation = op;  // Set the operation
@@ -204,8 +223,6 @@ function setOperation(op) {
         alert("Please enter a number before selecting an operation!");
     }
 }
-
-
 
 
 
@@ -225,6 +242,7 @@ function loadIncomeRecordForEditing(index) {
     // Populate the fields with the existing record's data
     document.getElementById('amountIncome').value = record.amountIncome;
     previousAmount = parseFloat(record.amountIncome); // Store the previous amount
+    amountField = previousAmount.toString(); // Initialize amountField for calculator logic
 
     document.getElementById('remarkIncome').value = record.remarkIncome;
     document.getElementById('incomeDate').value = new Date(record.date).toISOString().split('T')[0]; // Format date as YYYY-MM-DD

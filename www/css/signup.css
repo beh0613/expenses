@@ -303,3 +303,108 @@ input:focus {
 #cancelChange:hover {
     background-color: #ffb3c0 !important;
 }
+
+
+ /*New*/
+ .profile-picture-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.welcomeIMG {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.profile-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    outline: none;
+    transition: transform 0.2s, border 0.2s;
+}
+
+.profile-button img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    transition: transform 0.2s;
+}
+
+.profile-button.selected img {
+    border: 2px solid #4CAF50; /* Green border for selected */
+    transform: scale(1.2);
+}
+
+.profile-button img:hover {
+    transform: scale(1.1);
+}
+/* Username and Profile Picture Button Styling */
+.navigation-options {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.navigation-options button {
+    background-color: #87c6f9;
+    color: #ffffff;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    font-family: 'Lobster', cursive;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navigation-options button:hover {
+    background-color: #70aedd;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.navigation-options button:active {
+    transform: scale(0.95);
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.navigation-options button:focus {
+    outline: none;
+    border: 2px solid #5fa8d9;
+}
+
+/* Profile Picture Button Icon */
+.navigation-options button.profile-pic-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 15px;
+}
+
+.navigation-options button.profile-pic-btn img {
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.navigation-options button.profile-pic-btn img:hover {
+    transform: scale(1.2);
+}

@@ -40,24 +40,37 @@ function deleteLast() {
 
 function setOperation(op) {
     if (amountField) {
+        // Handle case when the field already has a value (e.g., from editing)
+        if (!operation) {
+            currentOperationValue = parseFloat(amountField);
+        }
         operation = op;
-        currentOperationValue = parseFloat(amountField);
-        amountField += op; // Append operation to the amount field
+        amountField += op; // Append operation to the amount field for display
         document.getElementById('amount').value = amountField;
     } else {
         alert("Please enter a number before selecting an operation!");
     }
 }
 
-
 function calculate() {
     if (operation && amountField) {
-        let newValue = parseFloat(amountField.split(operation)[1]);
+        // Split the amountField to retrieve the new value after the operation symbol
+        const parts = amountField.split(operation);
+        let newValue;
+
+        if (parts.length > 1 && parts[1]) {
+            newValue = parseFloat(parts[1]);
+        } else {
+            // If no second part exists, use 0 as the new value
+            newValue = 0;
+        }
+
         if (operation === "+") {
             currentOperationValue += newValue;
         } else if (operation === "-") {
             currentOperationValue -= newValue;
         }
+
         amountField = currentOperationValue.toString();
         operation = null;
         equalsPressed = true; // Mark that "=" was pressed
@@ -67,9 +80,6 @@ function calculate() {
         alert("Please complete the operation before pressing '='!");
     }
 }
-
-
-
 
 function asset() {
     const assets = [
@@ -98,12 +108,17 @@ function asset() {
     title.style.textAlign = "center";
     assetContainer.appendChild(title);
 
+    let selectedAssetButton = null;
+
     // Loop through the available assets
     assets.forEach(asset => {
         const item = document.createElement('div');
         item.style.display = "flex";
         item.style.alignItems = "center";
         item.style.marginBottom = "10px";
+        item.style.padding = "10px";
+        item.style.borderRadius = "8px";
+        item.style.transition = "background-color 0.3s ease";
 
         const img = document.createElement('img');
         img.src = asset.icon;
@@ -122,7 +137,6 @@ function asset() {
         amountSpan.style.marginLeft = "5px";
         amountSpan.style.color = "gray";
 
-
         // Add a "Select" button for each asset
         const selectButton = document.createElement('button');
         selectButton.textContent = "Select";
@@ -133,14 +147,29 @@ function asset() {
         selectButton.style.padding = "5px";
         selectButton.style.borderRadius = "5px";
         selectButton.style.cursor = "pointer";
+        selectButton.style.transition = "background-color 0.3s ease";
 
         selectButton.addEventListener('click', () => {
             // Handle the action for selecting the asset for income or expense
             alert(`You selected: ${asset.name}`);
-            // Store the selected asset in localStorage or use it in the next step (income/expense handling)
+            
+            // Store the selected asset
             localStorage.setItem('selectedAsset', asset.name);
             localStorage.setItem('selectedAssetIcon', asset.icon); // Save icon path
-            document.body.removeChild(assetContainer); // Close modal
+
+            // Update the button's appearance
+            if (selectedAssetButton) {
+                selectedAssetButton.style.backgroundColor = "#007bff";
+                selectedAssetButton.textContent = "Select";
+            }
+            selectButton.style.backgroundColor = "#28a745"; // Green for selected
+            selectButton.textContent = "Selected";
+            selectedAssetButton = selectButton;
+
+            // Highlight the selected asset's container
+            const items = assetContainer.querySelectorAll('div');
+            items.forEach(i => i.style.backgroundColor = "#fff"); // Reset all
+            item.style.backgroundColor = "#e6ffe6"; // Highlight the selected one
         });
 
         item.appendChild(img);
@@ -291,43 +320,83 @@ function quickAdd() {
 }
 
 function save() {
-    // Check if an operation was selected and equals was pressed
-    if (operation && !equalsPressed) {
+     // Check if an operation was selected and equals was pressed
+     if (operation && !equalsPressed) {
         alert("Please complete the calculation by pressing '=' before saving.");
-        return;
-    }
-
-    if (!selectedCategory) {
-        alert("Please select a category!");
         return;
     }
 
     const amount = parseFloat(document.getElementById('amount').value);
     const remark = document.getElementById('remark').value;
     const dateInput = document.getElementById('expenseDate').value;
-
-    const expenseDate = dateInput ? new Date(dateInput) : new Date();
+    
+    // Parse the date with moment.js
+    const expenseDate = dateInput ? moment(dateInput, 'YYYY-MM-DD').toDate() : null; // If date is provided, convert to Date object
 
     if (isNaN(amount) || amount <= 0) {
         alert("Please enter a valid amount!");
         return;
     }
 
-    const expenseRecord = {
-        category: selectedCategory.name,
-        icon: selectedCategory.icon,
-        amount,
-        remark,
-        date: new Date(expenseDate),
-        asset: localStorage.getItem('selectedAsset'), // Store the selected asset
-        assetIcon:localStorage.setItem('selectedAssetIcon', asset.icon) // Save icon path
-    };
+    // Ensure an asset is selected
+    const selectedAsset = localStorage.getItem('selectedAsset');
+    if (!selectedAsset) {
+        alert("Please select an asset!");
+        return;
+    }
 
-    let expenses = JSON.parse(localStorage.getItem("expenses")) || [];
-    expenses.push(expenseRecord);
-    localStorage.setItem("expenses", JSON.stringify(expenses));
+    // Get the existing record if editing
+    const recordIndex = localStorage.getItem('editRecordIndex');
+    const records = JSON.parse(localStorage.getItem('expenses')) || [];
 
+    let expenseRecord;
+
+    if (recordIndex !== null) {
+        // Editing an existing record
+        expenseRecord = records[recordIndex];
+
+        // If the user selects a new category, update it
+        if (selectedCategory) {
+            expenseRecord.category = selectedCategory.name;
+            expenseRecord.icon = selectedCategory.icon;
+        }
+
+        // Always update the amount and remark, retain the existing date unless updated
+        expenseRecord.amount = amount;
+        expenseRecord.remark = remark;
+
+        // Update the date only if it's provided (not null)
+        if (expenseDate) {
+            expenseRecord.date = moment(expenseDate).toISOString(); // Use moment.js for consistent date format
+        }
+
+        // Ensure asset is updated (if applicable)
+        expenseRecord.asset = selectedAsset;
+
+    } else {
+        // For a new record, ensure category is selected
+        if (!selectedCategory) {
+            alert("Please select a category!");
+            return;
+        }
+
+        expenseRecord = {
+            category: selectedCategory.name,
+            icon: selectedCategory.icon,
+            asset: selectedAsset,
+            assetIcon: localStorage.getItem('selectedAssetIcon'), // Include the asset icon
+            amount,
+            date: moment(expenseDate).toISOString(), // Use moment.js for the date format
+            remark
+        };
+
+        records.push(expenseRecord);
+    }
+
+    // Save the updated records back to localStorage
+    localStorage.setItem("expenses", JSON.stringify(records));
     alert("Expense saved!");
+    equalsPressed = false;  // Reset equalsPressed after saving
     resetFields();
     window.location.href = 'record.html'; // Adjust the redirection URL as needed
 
@@ -379,7 +448,9 @@ function loadRecordForEditing() {
         // If the record exists, populate the form with the existing data
         if (record) {
             // Set the form fields with the current record data
-            document.getElementById('amount').value = record.amount;
+            amountField = record.amount.toString(); // Pre-fill the amount field
+            currentOperationValue = parseFloat(record.amount); // Set the current value
+            document.getElementById('amount').value = amountField;
             document.getElementById('remark').value = record.remark;
 
             // Format the date using moment.js
@@ -391,7 +462,6 @@ function loadRecordForEditing() {
         }
     }
 }
-
 
 function selectCategoryByName(name, icon) {
     // Find all category buttons

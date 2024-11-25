@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/signup.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+</head>
+
+<body>
+    <div class="container">
+        <!-- Profile Picture Display -->
+        <div class="profile-picture-container">
+            <img id="currentProfilePic" src="image/defaultProfilePic.png" alt="Current Profile Picture" class="welcomeIMG">
+            <h2 id="welcomeMessage"></h2>
+        </div>
+
+        <!-- Profile Picture Selection -->
+        <div class="profile-picture-container">
+            <h3>Choose Your Profile Picture</h3>
+            <div class="button-container">
+                <button class="profile-button" data-src="image/profilePic1.gif">
+                    <img src="image/profilePic1.gif" alt="Profile Pic 1">
+                </button>
+                <button class="profile-button" data-src="image/profilePic2.gif">
+                    <img src="image/profilePic2.gif" alt="Profile Pic 2">
+                </button>
+                <button class="profile-button" data-src="image/profilePic3.gif">
+                    <img src="image/profilePic3.gif" alt="Profile Pic 3">
+                </button>
+                <button class="profile-button" data-src="image/profilePic4.gif">
+                    <img src="image/profilePic4.gif" alt="Profile Pic 4">
+                </button>
+                <button class="profile-button" data-src="image/profilePic5.gif">
+                    <img src="image/profilePic5.gif" alt="Profile Pic 5">
+                </button>
+                <button class="profile-button" data-src="image/profilePic6.gif">
+                    <img src="image/profilePic6.gif" alt="Profile Pic 6">
+                </button>
+                <button class="profile-button" data-src="image/profilePic7.gif">
+                    <img src="image/profilePic7.gif" alt="Profile Pic 7">
+                </button>
+                <button class="profile-button" data-src="image/profilePic9.gif">
+                    <img src="image/profilePic9.gif" alt="Profile Pic 9">
+                </button>
+                <button class="profile-button" data-src="image/pp1.png">
+                    <img src="image/pp1.png" alt="Profile Pic 10">
+                </button>
+                <button class="profile-button" data-src="image/pp2.png">
+                    <img src="image/pp2.png" alt="Profile Pic 11">
+                </button>
+                <button class="profile-button" data-src="image/pp3.png">
+                    <img src="image/pp3.png" alt="Profile Pic 12">
+                </button>
+                <button class="profile-button" data-src="image/pp4.png">
+                    <img src="image/pp4.png" alt="Profile Pic 13">
+                </button>
+                <button class="profile-button" data-src="image/pp5.png">
+                    <img src="image/pp5.png" alt="Profile Pic 14">
+                </button>
+                <button class="profile-button" data-src="image/pp6.png">
+                    <img src="image/pp6.png" alt="Profile Pic 15">
+                </button>
+                <button class="profile-button" data-src="image/pp7.png">
+                    <img src="image/pp7.png" alt="Profile Pic 16">
+                </button>
+                <button class="profile-button" data-src="image/pp8.png">
+                    <img src="image/pp8.png" alt="Profile Pic 17">
+                </button>
+                
+            </div>
+        </div>
+
+        <!-- Navigation Options -->
+        <div class="navigation-options">
+            <a href="record.html"><button type="button">Back</button></a>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            // Load existing profile picture and username
+            const selectedProfilePicture = localStorage.getItem('selectedProfilePicture') || 'image/defaultProfilePic.png';
+            const currentUser = localStorage.getItem('currentUser') || 'Guest';
+
+            $('#currentProfilePic').attr('src', selectedProfilePicture);
+            $('#welcomeMessage').text(`Welcome, ${currentUser}!`);
+
+            // Profile picture selection
+            const profileButtons = document.querySelectorAll('.profile-button');
+
+            profileButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const newProfilePic = button.getAttribute('data-src');
+
+                    // Update the displayed profile picture
+                    $('#currentProfilePic').attr('src', newProfilePic);
+
+                    // Highlight the selected profile button
+                    profileButtons.forEach(btn => btn.classList.remove('selected'));
+                    button.classList.add('selected');
+
+                    // Save the new profile picture to localStorage
+                    localStorage.setItem('selectedProfilePicture', newProfilePic);
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
