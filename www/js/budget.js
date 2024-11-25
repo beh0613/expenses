@@ -140,11 +140,21 @@ function displayBudgetSummary() {
 
 
 
-// Calculate Total Expenses (Dummy Function)
 function calculateTotalExpenses() {
     const expenses = JSON.parse(localStorage.getItem('expenses')) || [];
-    return expenses.reduce((total, expense) => total + parseFloat(expense.amount || 0), 0);
+    const startOfMonth = moment().startOf('month');
+    const endOfMonth = moment().endOf('month');
+
+    // Filter expenses to include only those within the current month
+    const currentMonthExpenses = expenses.filter(expense => {
+        const expenseDate = moment(expense.date); // Parse the expense date
+        return expenseDate.isBetween(startOfMonth, endOfMonth, 'days', '[]'); // Inclusive of start and end dates
+    });
+
+    // Calculate the total of filtered expenses
+    return currentMonthExpenses.reduce((total, expense) => total + parseFloat(expense.amount || 0), 0);
 }
+
 
 
 
