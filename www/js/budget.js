@@ -48,6 +48,10 @@ $(document).ready(function () {
 
     $('#set-budget').click(setBudget);
     $('#edit-budget').click(editBudget);
+    const summaryNavBar = document.getElementById('summaryNavBar');
+    if (summaryNavBar) {
+        summaryNavBar.addEventListener('click', checkExpensesOnSummaryClick);
+    }
 });
 
 // Function to Show Budget Input Section
@@ -95,14 +99,46 @@ function displayBudgetSummary() {
     const remainingDays = end.diff(now, 'days') + 1; // Include today
 
     const totalExpenses = calculateTotalExpenses();
-    const remainingBudget = Math.max(budget - totalExpenses, 0);
-    const dailyAllowance = (remainingBudget / remainingDays).toFixed(2);
+    const remainingBudget = budget - totalExpenses; // Allow negative values for exceeded budget
+    const dailyAllowance = (remainingBudget / remainingDays).toFixed(2); // Allow negative values for daily allowance
+    const remainingPercentage = ((remainingBudget / budget) * 100).toFixed(2);
 
+    // Update budget period and remaining days
     $('#budget-period').text(`${start.format('MMM 1')} to ${end.format('MMM D, YYYY')}`);
     $('#remaining-days').text(remainingDays);
-    $('#remaining-amount').text(remainingBudget.toFixed(2));
-    $('#daily-allowance').text(dailyAllowance);
+
+    // Update remaining amount
+    const remainingAmountElement = $('#remaining-amount');
+    remainingAmountElement.text(Math.abs(remainingBudget).toFixed(2));
+    if (remainingBudget < 0) {
+        remainingAmountElement.css('color', 'red');
+        remainingAmountElement.text(`-${Math.abs(remainingBudget).toFixed(2)}`);
+    } else {
+        remainingAmountElement.css('color', ''); // Reset color
+    }
+
+    // Update remaining percentage
+    const remainingPercentageElement = $('#remaining-percentage');
+    remainingPercentageElement.text(Math.abs(remainingPercentage).toFixed(2));
+    if (remainingBudget < 0) {
+        remainingPercentageElement.css('color', 'red');
+        remainingPercentageElement.text(`-${Math.abs(remainingPercentage).toFixed(2)}`);
+    } else {
+        remainingPercentageElement.css('color', ''); // Reset color
+    }
+
+    // Update daily allowance
+    const dailyAllowanceElement = $('#daily-allowance');
+    dailyAllowanceElement.text(dailyAllowance);
+    if (remainingBudget < 0) {
+        dailyAllowanceElement.css('color', 'red');
+    } else {
+        dailyAllowanceElement.css('color', ''); // Reset color
+    }
 }
+
+
+
 
 // Calculate Total Expenses (Dummy Function)
 function calculateTotalExpenses() {

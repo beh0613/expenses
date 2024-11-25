@@ -190,8 +190,8 @@ button:hover,
 
 /* Action Icon Styling */
 .action-icon {
-    width: 24px !important;
-    height: 24px !important;
+    width: 30px !important;
+    height: 30px !important;
     vertical-align: middle;
     object-fit: contain;
     transition: transform 0.3s ease;
@@ -212,8 +212,8 @@ button:hover,
 #edit-budget,
 #set-budget {
     margin-left: 8px;
-    width: 24px;
-    height: 24px;
+    width: 30px;
+    height: 30px;
 }
 
 /* Budget Display Section */
@@ -399,4 +399,11 @@ button:hover,
         width: 20px !important;
         height: 20px !important;
     }
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    vertical-align: middle;
 }
