@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Manager</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/budget.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Poppins:wght@500&display=swap"
+        rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-icons">
+        <a href="login.html?change=true" id="usernameLink" title="Username">
+            <img src="image/profilePic8.gif" alt="Username">
+            <span class="nav-title">Username</span>
+        </a>
+        <a href="record.html" title="Record">
+            <img src="image/record.gif" alt="Record">
+            <span class="nav-title">Record</span>
+        </a>
+        <a href="summary.html" id="summaryNavBar" title="Summary">
+            <img src="image/summary.png" alt="Summary">
+            <span class="nav-title">Summary</span>
+        </a>
+
+        <a href="assetPage.html" title="Asset">
+            <img src="image/assetManage.gif" alt="Asset">
+            <span class="nav-title">Asset</span>
+        </a>
+        <a href="budget.html" title="Budget">
+            <img src="image/budgeting.gif" alt="Budget">
+            <span class="nav-title">Budget</span>
+        </a>
+    </div>
+
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="container mt-4">
+        <h1>Budget Manager</h1>
+
+        <!-- Budget Input Section -->
+        <div id="budget-section" class="mb-4 text-center">
+            <h4>Enter Your Monthly Budget</h4>
+            <div class="input-group mb-2">
+                <input type="number" id="budget-input" class="form-control" placeholder="Enter budget amount">
+                <img id="set-budget" class="action-icon" src="image/submit.gif" alt="Enter Budget">
+            </div>
+        </div>
+
+        <!-- Budget Display Section -->
+        <div id="budget-display-section" class="mb-4 text-center d-none">
+            <h4>Monthly Budget</h4>
+            <p><b>Budget:</b> RM<span id="displayed-budget"></span>
+                <img id="edit-budget" class="action-icon" src="image/editbudget.gif" alt="Edit Budget">
+            </p>
+        </div>
+
+        <!-- Budget Summary -->
+        <div id="budget-summary" class="mb-4 d-none">
+            <h4>Budget Summary</h4>
+            <p><b>Budget Period:</b> <br><span id="budget-period"></span></p>
+            <p><b>Remaining Days:</b> <br><span id="remaining-days"></span></p>
+            <p><b>Remaining Amount:</b><br> RM<span id="remaining-amount"></span></p>
+            <p><b>Daily Allowance:</b> <br>RM<span id="daily-allowance"></span></p>
+        </div>
+
+    </div>
+
+    <script src="js/budget.js"></script>
+</body>
+
+</html>

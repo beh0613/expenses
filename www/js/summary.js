@@ -521,26 +521,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const categoryIcons = {
-            "Food": "image/iconFood.png",
-            "Fruits": "image/iconFruits.png",
-            "Drink": "image/iconDrink.png",
-            "Dessert": "image/iconDessert.png",
-            "Car": "image/iconCar.png",
-            "Bus": "image/iconBus.png",
-            "Clothes": "image/iconClothes.png",
-            "Cosmetic": "image/iconComestic.png",
-            "Delivery": "image/iconDelivery.png",
-            "Fuel": "image/iconFuel.png",
-            "Game": "image/iconGame.png",
-            "Medical": "image/iconMedical.png",
-            "Pet": "image/iconPet.png",
-            "Restaurant": "image/iconRestaurant.png",
-            "Shopping": "image/iconShopping.png",
-            "Sport": "image/iconSport.png",
-            "Tool": "image/iconTool.png",
-            "Travel": "image/iconTravel.png",
-            "Vegetable": "image/iconVegetable.png",
-            "Other": "image/defaultIcon.png" // Default icon
+            "Food": "./image/iconFood.png",
+            "Fruits": "./image/iconFruits.png",
+            "Drink": "./image/iconDrink.png",
+            "Dessert": "./image/iconDessert.png",
+            "Car": "./image/iconCar.png",
+            "Bus": "./image/iconBus.png",
+            "Clothes": "./image/iconClothes.png",
+            "Comestic": "./image/iconComestic.png",
+            "Delivery": "./image/iconDelivery.png",
+            "Fuel": "./image/iconFuel.png",
+            "Game": "./image/iconGame.png",
+            "Medical": "./image/iconMedical.png",
+            "Pet": "./image/iconPet.png",
+            "Restaurant": "./image/iconRestaurant.png",
+            "Shopping": "./image/iconShopping.png",
+            "Sport": "./image/iconSport.png",
+            "Tool": "./image/iconTool.png",
+            "Travel": "./image/iconTravel.png",
+            "Vegetable": "./image/iconVegetable.png",
+            "Feed":"./image/iconFeed.png"
         };
 
         const categoryTotals = {};
