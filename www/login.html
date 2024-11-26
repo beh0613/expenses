@@ -5,36 +5,48 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/signup.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/login.js" defer></script>
 </head>
 
-<body>
-    <!-- login.html -->
-    <div class="container">
-        <img src="image/profilePic11.gif" alt="Welcome Image" class="welcomeIMG">
-        <h2>Login to Your Account</h2>
+<body class="d-flex justify-content-center align-items-center vh-100" style="background-color: #f0f8ff;">
+    <div class="container p-5 rounded shadow text-center" style="max-width: 400px;">
+        <img src="image/profilePic11.gif" alt="Welcome Image" class="welcomeIMG mx-auto d-block">
+        <h2 class="text-primary mb-4">Login to Your Account</h2>
         <form id="loginForm">
-            <label for="login-username">Username</label>
-            <input type="text" id="login-username" placeholder="Enter username" required>
-            <button type="submit">Login</button>
+            <div class="mb-3 text-start">
+                <label for="login-username" class="form-label fw-bold">Username</label>
+                <input type="text" id="login-username" class="form-control" placeholder="Enter username" required>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
         </form>
-    
+
         <!-- Username change section (initially hidden) -->
-        <div id="changeUsernameSection" class="hidden">
+        <div id="changeUsernameSection" class="hidden mt-4">
             <form id="changeUsernameForm">
-                <input type="text" id="current-username" placeholder="Current username" required>
-                <input type="text" id="new-username" placeholder="New username" required>
-                <button type="submit">Change Username</button>
-                <button type="button" id="cancelChange">Cancel</button>
+                <div class="mb-3">
+                    <input type="text" id="current-username" class="form-control" placeholder="Current username"
+                        required>
+                </div>
+                <div class="mb-3">
+                    <input type="text" id="new-username" class="form-control" placeholder="New username" required>
+                </div>
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">Change Username</button>
+                    <button type="button" id="cancelChange" class="btn btn-secondary">Cancel</button>
+                </div>
             </form>
         </div>
-        
+
         <!-- Link to show username change form -->
-        <p class="change-username-link">
-            Already have an account? <a href="#" id="showChangeUsername">Change username</a>
+        <p class="change-username-link mt-3">
+            Already have an account? <a href="#" id="showChangeUsername"
+                class="text-decoration-none text-primary">Change username</a>
         </p>
     </div>
 </body>
