@@ -26,26 +26,4 @@ document.addEventListener('deviceready', onDeviceReady, false);
             checkLoginState();
         }
 
-        document.addEventListener("DOMContentLoaded", function () {
-            // Also check the login state for web browsers or when Cordova isn't initialized
-            checkLoginState();
-
-            // Attach event to login button
-            document.getElementById('loginBtn').addEventListener('click', function () {
-                // Check if the user is already logged in
-                if (localStorage.getItem("isLoggedIn") === "true") {
-                    // Redirect to record page
-                    window.location.href = "record.html";
-                } else {
-                    // Redirect to login page
-                    window.location.href = "login.html";
-                }
-            });
-        });
-
-        function checkLoginState() {
-            // Automatically redirect if the user is logged in
-            if (localStorage.getItem("isLoggedIn") === "true") {
-                window.location.href = "record.html";
-            }
-        }
+        
