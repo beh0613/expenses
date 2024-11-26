@@ -79,5 +79,15 @@ function showTransactions(assetName) {
     }
 }
 document.getElementById('cashTotal').innerHTML = `Total: RM${calculateTotal('Cash')}`;
-    document.getElementById('ewalletTotal').innerHTML = `Total: RM${calculateTotal('Ewallet')}`;
-    document.getElementById('cardTotal').innerHTML = `Total: RM${calculateTotal('CardNumber')}`;
+document.getElementById('ewalletTotal').innerHTML = `Total: RM${calculateTotal('Ewallet')}`;
+document.getElementById('cardTotal').innerHTML = `Total: RM${calculateTotal('CardNumber')}`;
+
+function checkExpensesOnSummaryClick(event) {
+    if (expenses.length === 0) {
+        event.preventDefault(); // Prevent navigation to the summary page
+        alert('No expense information is available. Please add expenses before proceeding to the summary page.');
+    }
+}
+
+
+
