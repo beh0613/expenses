@@ -1,27 +1,23 @@
 /* General Body Styling */
+html,
 body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    background-color: #f0f8ff !important;
+    /* Your blue background color */
+    height: 100%;
+    /* Ensure it covers the full screen */
     margin: 0;
-    background-color: #f0f8ff;
-    /* Pastel light blue background */
+    padding: 0;
     font-family: 'Lobster', cursive;
-    /* Cute font */
 }
 
 /* Main Container */
 .container {
-    background: #ffffff;
-    padding: 40px;
+    background: #ffffff !important;
+    /* White for the form box */
     border-radius: 15px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
+    padding: 40px;
 }
-
 /* Header Styling */
 h2 {
     color: #5fa8d9;
@@ -42,75 +38,8 @@ h2 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Navigation Links (Login/Sign Up) */
-.toggle-links {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 30px;
-}
-
-.toggle-links a {
-    text-decoration: none;
-    color: #5fa8d9;
-    font-weight: bold;
-    margin: 0 10px;
-    padding: 5px 10px;
-    border-bottom: 2px solid transparent;
-    transition: color 0.3s, border-color 0.3s;
-}
-
-.toggle-links a:hover {
-    color: #3e90c1;
-    border-color: #5fa8d9;
-}
-
-.toggle-links .active {
-    color: #3e90c1;
-    border-color: #5fa8d9;
-}
-
-/* Form Section (Hidden by default for Login) */
-.form-section {
-    display: block;
-}
-
-/* Input Field Styling */
-.form-group {
-    margin-bottom: 20px;
-    text-align: left;
-}
-
-#loginForm button {
-    width: 100%;
-    background-color: #87c6f9;
-    color: #ffffff;
-    padding: 12px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: transform 0.2s, background-color 0.3s;
-    cursor: pointer;
-    font-family: 'Lobster', cursive;
-}
-
-#loginForm button:hover {
-    background-color: #70aedd;
-}
-
-#loginForm button:active {
-    transform: scale(0.95);
-}
-
-label {
-    color: #333333;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 5px;
-}
-
-input {
-    width: 100%;
+/* Form Input Fields */
+.form-control {
     padding: 10px;
     border: 1px solid #cfe0f6;
     border-radius: 5px;
@@ -119,13 +48,13 @@ input {
     transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input:focus {
+.form-control:focus {
     outline: none;
     border-color: #5fa8d9;
     box-shadow: 0 0 5px rgba(95, 168, 217, 0.3);
 }
 
-/* Button Styling */
+/* Buttons */
 .btn {
     width: 100%;
     background-color: #87c6f9;
@@ -148,54 +77,28 @@ input:focus {
     transform: scale(0.95);
 }
 
-/* Footer Information */
-.info-text {
-    color: #777777;
-    font-size: 14px;
-    margin-top: 20px;
+/* Change Username Section */
+#changeUsernameSection {
+    background-color: #f9fcff;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    padding: 20px;
 }
 
-.info-text a {
+.hidden {
+    display: none;
+}
+
+/* Links */
+a {
     color: #5fa8d9;
     text-decoration: none;
-}
-
-.info-text a:hover {
-    text-decoration: underline;
-}
-
-/* Password visibility toggle styling */
-.password-container {
-    position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.toggle-password {
-    position: absolute;
-    right: 10px;
-    border: none;
-    background: none;
-    cursor: pointer;
-    padding: 8px;
-    color: #5fa8d9;
-    font-size: 16px;
     transition: color 0.3s;
 }
 
-.toggle-password:hover {
+a:hover {
     color: #3e90c1;
-}
-
-/* Adjust password input to accommodate the toggle button */
-.password-container input {
-    padding-right: 40px;
-    width: 100%;
-}
-
-/* Hidden Element */
-.hidden {
-    display: none;
+    text-decoration: underline;
 }
 
 /* Message Styling */
@@ -203,7 +106,6 @@ input:focus {
     padding: 12px;
     margin: 15px 0;
     border-radius: 10px;
-    font-family: 'Lobster', cursive;
     text-align: center;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
@@ -223,78 +125,6 @@ input:focus {
     border: 1px solid #ffd1d9;
 }
 
-/* Change Username Link */
-.change-username-link {
-    margin-top: 20px;
-    text-align: center;
-    font-size: 14px;
-}
-
-.change-username-link a {
-    color: #5fa8d9;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-.change-username-link a:hover {
-    color: #3e90c1;
-    text-decoration: underline;
-}
-
-/* Change Username Section */
-#changeUsernameSection {
-    margin-top: 25px;
-    padding: 20px;
-    background-color: #f9fcff;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-/* Change Username Form */
-#changeUsernameForm {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-#changeUsernameForm input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #cfe0f6;
-    border-radius: 5px;
-    font-size: 14px;
-    background-color: #f9fcff;
-    transition: border-color 0.3s, box-shadow 0.3s;
-}
-
-#changeUsernameForm input:focus {
-    outline: none;
-    border-color: #5fa8d9;
-    box-shadow: 0 0 5px rgba(95, 168, 217, 0.3);
-}
-
-#changeUsernameForm button {
-    width: 100%;
-    background-color: #87c6f9;
-    color: #ffffff;
-    padding: 12px;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: transform 0.2s, background-color 0.3s;
-    cursor: pointer;
-    font-family: 'Lobster', cursive;
-}
-
-#changeUsernameForm button:hover {
-    background-color: #70aedd;
-}
-
-#changeUsernameForm button:active {
-    transform: scale(0.95);
-}
-
 /* Cancel Button */
 #cancelChange {
     background-color: #ffd1d9 !important;
@@ -304,9 +134,8 @@ input:focus {
     background-color: #ffb3c0 !important;
 }
 
-
- /*New*/
- .profile-picture-container {
+/* Profile Picture Styling */
+.profile-picture-container {
     text-align: center;
     margin-bottom: 20px;
 }
@@ -319,92 +148,11 @@ input:focus {
     margin-bottom: 10px;
 }
 
-.button-container {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.profile-button {
-    border: none;
-    background: none;
-    cursor: pointer;
-    padding: 0;
-    outline: none;
-    transition: transform 0.2s, border 0.2s;
-}
-
-.profile-button img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    transition: transform 0.2s;
-}
-
-.profile-button.selected img {
-    border: 2px solid #4CAF50; /* Green border for selected */
-    transform: scale(1.2);
-}
-
-.profile-button img:hover {
-    transform: scale(1.1);
-}
-/* Username and Profile Picture Button Styling */
-.navigation-options {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.navigation-options button {
-    background-color: #87c6f9;
-    color: #ffffff;
-    border: none;
-    border-radius: 25px;
-    padding: 12px 20px;
-    font-size: 16px;
-    font-weight: bold;
-    font-family: 'Lobster', cursive;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.navigation-options button:hover {
-    background-color: #70aedd;
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-}
-
-.navigation-options button:active {
-    transform: scale(0.95);
-    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-}
-
-.navigation-options button:focus {
-    outline: none;
-    border: 2px solid #5fa8d9;
-}
-
-/* Profile Picture Button Icon */
-.navigation-options button.profile-pic-btn {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 15px;
-}
-
-.navigation-options button.profile-pic-btn img {
-    width: 25px;
-    height: 25px;
-    border-radius: 50%;
-    object-fit: cover;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-}
-
-.navigation-options button.profile-pic-btn img:hover {
-    transform: scale(1.2);
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        max-width: 100%;
+        margin: 0 10px;
+    }
 }
