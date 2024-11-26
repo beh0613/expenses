@@ -30,11 +30,14 @@ function calculateTotal(assetName) {
 }
 
 function showTransactions(assetName) {
-    const assetTransactions = document.getElementById(`${assetName.toLowerCase()}Transactions`);
-    const totalAmount = calculateTotal(assetName);
-    const totalElement = document.getElementById(`${assetName.toLowerCase()}Total`);
-    totalElement.innerHTML = `Total: $${totalAmount}`;
+    const assetNameIdMap = {
+        "CardNumber": "card",
+        "Cash": "cash",
+        "Ewallet": "ewallet"
+    };
 
+    const elementId = assetNameIdMap[assetName] || assetName.toLowerCase();
+    const assetTransactions = document.getElementById(`${elementId}Transactions`);
     assetTransactions.innerHTML = ''; // Clear previous transactions
 
     const assetIncomes = incomes.filter(income => income.asset === assetName);
@@ -43,24 +46,24 @@ function showTransactions(assetName) {
     if (assetIncomes.length === 0 && assetExpenses.length === 0) {
         assetTransactions.innerHTML = '<p>No transactions found for this asset.</p>';
     } else {
-        // Display incomes
+        // Render incomes
         assetIncomes.forEach(income => {
-            const transactionItem = document.createElement('div');
-            transactionItem.classList.add('transaction-item', 'income');
-            transactionItem.innerHTML = ` 
-                <div style="display: flex; align-items: center;">
-                    <img src="${income.icon}" alt="${income.category} Icon" style="width: 20px; height: 20px; margin-right: 10px;">
-                    <span>${income.category}</span>
-                </div>
-                <div>
-                    <span>${income.amountIncome}</span> 
+        const transactionItem = document.createElement('div');
+        transactionItem.classList.add('transaction-item', 'income');
+        transactionItem.innerHTML = `
+            <div style="display: flex; align-items: center;">
+                <img src="${income.icon}" alt="${income.category} Icon" style="width: 20px; height: 20px; margin-right: 10px;">
+                <span>${income.category}</span>
+            </div>
+            <div>
+                <span>${income.amountIncome}</span> 
                 </div>
                 <small>${new Date(income.date).toLocaleDateString()}</small>
             `;
             assetTransactions.appendChild(transactionItem);
         });
 
-        // Display expenses
+        // Render expenses
         assetExpenses.forEach(expense => {
             const transactionItem = document.createElement('div');
             transactionItem.classList.add('transaction-item', 'expense');
@@ -78,9 +81,12 @@ function showTransactions(assetName) {
         });
     }
 }
-document.getElementById('cashTotal').innerHTML = `Total: RM${calculateTotal('Cash')}`;
-document.getElementById('ewalletTotal').innerHTML = `Total: RM${calculateTotal('Ewallet')}`;
-document.getElementById('cardTotal').innerHTML = `Total: RM${calculateTotal('CardNumber')}`;
+
+    // Update totals for different assets
+    document.getElementById('cashTotal').innerHTML = `Total: RM${calculateTotal('Cash')}`;
+    document.getElementById('ewalletTotal').innerHTML = `Total: RM${calculateTotal('Ewallet')}`;
+    document.getElementById('cardTotal').innerHTML = `Total: RM${calculateTotal('CardNumber')}`;
+
 
 function checkExpensesOnSummaryClick(event) {
     if (expenses.length === 0) {

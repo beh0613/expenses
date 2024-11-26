@@ -22,33 +22,34 @@
     </div>
     <div class="menu-toggle" onclick="toggleMenu()">☰</div>
 
-    <img src="image/penguin.png" id="imageAsset"> 
+    <img src="image/penguin.png"  id="imageAsset"> 
     <h2>Asset Management</h2>
-    <div class="asset-container">
+    <!-- Asset Container -->
+    <div class="asset-container d-flex justify-content-center gap-3 flex-wrap mt-5">
         <!-- Cash Asset -->
         <div class="asset-box" id="cashAsset">
-            <img src="image/incomeCash.png" alt="Cash">
-            <h3>Cash</h3>
-            <p class="asset-total" id="cashTotal">Total: RM0.00</p>
-            <button class="view-transactions-btn" onclick="showTransactions('Cash')">View Transactions</button>
+            <img src="image/incomeCash.png" alt="Cash" class="mb-3">
+            <h3 class="h5 text-dark">Cash</h3>
+            <p class="asset-total h6 text-muted" id="cashTotal">Total: RM0.00</p>
+            <button class="view-transactions-btn btn btn-success " onclick="showTransactions('Cash')">View Transactions</button>
             <div class="transaction-list" id="cashTransactions"></div>
         </div>
 
         <!-- Ewallet Asset -->
         <div class="asset-box" id="ewalletAsset">
-            <img src="image/ewallet.png" alt="Ewallet">
-            <h3>Ewallet</h3>
-            <p class="asset-total" id="ewalletTotal">Total: RM0.00</p>
-            <button class="view-transactions-btn" onclick="showTransactions('Ewallet')">View Transactions</button>
+            <img src="image/ewallet.png" alt="Ewallet" class="mb-3">
+            <h3 class="h5 text-dark">Ewallet</h3>
+            <p class="asset-total h6 text-muted" id="ewalletTotal">Total: RM0.00</p>
+            <button class="view-transactions-btn btn btn-success " onclick="showTransactions('Ewallet')">View Transactions</button>
             <div class="transaction-list" id="ewalletTransactions"></div>
         </div>
 
         <!-- Card Asset -->
         <div class="asset-box" id="cardAsset">
-            <img src="image/bankCard.png" alt="Card Number">
-            <h3>Card Number</h3>
-            <p class="asset-total" id="cardTotal">Total: $0</p>
-            <button class="view-transactions-btn" onclick="showTransactions('CardNumber')">View Transactions</button>
+            <img src="image/bankCard.png" alt="Card Number" class="mb-3">
+            <h3 class="h5 text-dark">Card Number</h3>
+            <p class="asset-total h6 text-muted" id="cardTotal">Total: $0</p>
+            <button class="view-transactions-btn btn btn-success " onclick="showTransactions('CardNumber')">View Transactions</button>
             <div class="transaction-list" id="cardTransactions"></div>
         </div>
 

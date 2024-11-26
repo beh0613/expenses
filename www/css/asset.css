@@ -95,12 +95,12 @@ body {
     /* Styling for the penguin image (imageAsset) */
     #imageAsset {
         display: block;
-        margin: 50px auto 20px; /* Center the image and add spacing */
-        width: 120px; /* Set a reasonable size */
+        margin: 50px auto 20px; 
+        width: 120px; 
         height: auto;
-        border-radius: 50%; /* Circular style */
-        border: 4px solid #4e79d4; /* Border with theme color */
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+        border-radius: 50%; 
+        border: 4px solid #4e79d4; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
         transition: transform 0.3s ease;
     }
 
