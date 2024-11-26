@@ -1,17 +1,15 @@
 $(document).ready(function () {
-    // Check if the user is logged in
-    if (localStorage.getItem("isLoggedIn") === "true") {
-        window.location.href = 'record.html'; // Redirect directly to record page
-        return; // Stop further execution
-    }
-
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
     // Check if this is a username change request
     const isChangingUsername = new URLSearchParams(window.location.search).get('change') === 'true';
-
+    // Check if the user is logged in
+    // Check if the user is logged in and not trying to change username
+    if (isLoggedIn && !isChangingUsername) {
+        window.location.href = 'record.html'; // Redirect directly to the record page
+        return; // Stop further execution
+    }
     // Only redirect if user is logged in AND not trying to change username
     const currentUser = localStorage.getItem('currentUser');
-    
-
     // Pre-fill username field if changing username
     if (isChangingUsername && currentUser) {
         $('#login-username').val(currentUser);
