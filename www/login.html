@@ -22,22 +22,28 @@
             <div class="mb-3 text-start">
                 <label for="login-username" class="form-label fw-bold">Username</label>
                 <input type="text" id="login-username" class="form-control" placeholder="Enter username" required>
+                <label for="login-password" class="form-label fw-bold">Password</label>
+                <input type="text" id="psw" class="form-control" placeholder="Enter Password" required>
+
             </div>
-            <button type="submit" class="btn btn-primary w-100">Login</button>
+            <a href="profilepic.html"><button type="submit" class="btn btn-primary w-100">Login</button></a>
         </form>
 
         <!-- Username change section (initially hidden) -->
         <div id="changeUsernameSection" class="hidden mt-4">
             <form id="changeUsernameForm">
                 <div class="mb-3">
-                    <input type="text" id="current-username" class="form-control" placeholder="Current username"
-                        required>
+                    <input type="text" id="current-username" class="form-control" placeholder="Current username" required>
                 </div>
                 <div class="mb-3">
-                    <input type="text" id="new-username" class="form-control" placeholder="New username" required>
+                    <input type="password" id="password" class="form-control" placeholder="Password" required>
+                </div>
+                <button class="btn btn-primary" id="checkPasswordBtn" type="button" style="margin-bottom: 5px;">Check</button>
+                <div class="mb-3">
+                    <input type="text" id="new-username" class="form-control" placeholder="New username" required disabled>
                 </div>
                 <div class="d-grid gap-2">
-                    <button type="submit" class="btn btn-success">Change Username</button>
+                    <a href="profilepic.html"><button type="submit" class="btn btn-success" disabled>Change Username</button></a>
                     <button type="button" id="cancelChange" class="btn btn-secondary">Cancel</button>
                 </div>
             </form>
@@ -45,8 +51,7 @@
 
         <!-- Link to show username change form -->
         <p class="change-username-link mt-3">
-            Already have an account? <a href="#" id="showChangeUsername"
-                class="text-decoration-none text-primary">Change username</a>
+            Already have an account? <a href="#" id="showChangeUsername" class="text-decoration-none text-primary">Change username</a>
         </p>
     </div>
 </body>

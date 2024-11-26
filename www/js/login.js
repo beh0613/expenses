@@ -4,9 +4,7 @@ $(document).ready(function () {
 
     // Only redirect if user is logged in AND not trying to change username
     const currentUser = localStorage.getItem('currentUser');
-    if (currentUser && !isChangingUsername) {
-        window.location.href = 'record.html';
-    }
+    
 
     // Pre-fill username field if changing username
     if (isChangingUsername && currentUser) {
@@ -23,37 +21,45 @@ $(document).ready(function () {
         e.preventDefault();
 
         const username = $('#login-username').val().trim();
+        const password = $('#psw').val().trim();  // Added password field
 
         // Basic validation
-        if (!username) {
-            showError('Please enter a username');
+        if (!username || !password) {
+            showError('Please enter both username and password');
             return;
         }
 
-        // Get existing users from localStorage or create empty array
+        // Get existing users from localStorage or create an empty array
         const users = JSON.parse(localStorage.getItem('users')) || [];
 
         // Check if user exists
-        const userExists = users.some(user => user.username === username);
+        const existingUser = users.find(user => user.username === username);
 
-        if (!userExists) {
-            // If user doesn't exist, add them to users array
+        if (!existingUser) {
+            // If user doesn't exist, create a new user with the entered password
             users.push({
                 username: username,
+                password: password,  // Save password for new user
                 joinDate: new Date().toISOString()
             });
             localStorage.setItem('users', JSON.stringify(users));
+            showSuccess('New user created! Redirecting...');
+        } else {
+            // If user exists, check if password matches
+            if (existingUser.password !== password) {
+                showError('Incorrect password');
+                return;
+            }
+
+            showSuccess('Login successful! Redirecting...');
         }
 
         // Save current user to localStorage
         localStorage.setItem('currentUser', username);
 
-        // Show success message with animation
-        showSuccess('Login successful! Redirecting...');
-
         // Redirect to main page after short delay
         setTimeout(() => {
-            window.location.href = 'record.html';
+            window.location.href = 'profilepic.html';
         }, 1500);
     });
 
@@ -75,6 +81,36 @@ $(document).ready(function () {
             $('.change-username-link').show();
             $('#changeUsernameForm')[0].reset();
         }
+    });
+
+    // Check password and enable new username field when "Check" button is clicked
+    $('#checkPasswordBtn').on('click', function () {
+        const currentUsername = $('#current-username').val().trim();
+        const password = $('#password').val().trim();
+
+        if (!currentUsername || !password) {
+            showError('Please enter both username and password');
+            return;
+        }
+
+        const users = JSON.parse(localStorage.getItem('users')) || [];
+        const user = users.find(user => user.username === currentUsername);
+
+        if (!user) {
+            showError('Username not found');
+            return;
+        }
+
+        if (user.password !== password) {
+            showError('Incorrect password');
+            return;
+        }
+
+        // Enable the "new username" input and submit button
+        $('#new-username').prop('disabled', false);
+        $('#changeUsernameForm button[type="submit"]').prop('disabled', false);
+
+        showSuccess('Password correct. You can now change the username.');
     });
 
     // Handle username change
@@ -116,16 +152,16 @@ $(document).ready(function () {
 
         // Redirect back to record page after username change
         setTimeout(() => {
-            window.location.href = 'record.html';
+            window.location.href = 'profilepic.html';
         }, 1500);
     });
 
     // Helper functions remain the same
     function showError(message) {
         $('.message').remove();
-        const errorDiv = $('<div>')
-            .addClass('message error')
-            .text(message)
+        const errorDiv = $('<div>')  
+            .addClass('message error') 
+            .text(message) 
             .hide()
             .insertAfter('#loginForm');
 
@@ -140,12 +176,18 @@ $(document).ready(function () {
 
     function showSuccess(message) {
         $('.message').remove();
-        const successDiv = $('<div>')
-            .addClass('message success')
-            .text(message)
+        const successDiv = $('<div>')  
+            .addClass('message success') 
+            .text(message) 
             .hide()
             .insertAfter('#loginForm');
 
         successDiv.fadeIn(300);
+
+        setTimeout(() => {
+            successDiv.fadeOut(300, function () {
+                $(this).remove();
+            });
+        }, 3000);
     }
 });
