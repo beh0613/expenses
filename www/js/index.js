@@ -21,10 +21,31 @@
 // See https://cordova.apache.org/docs/en/latest/cordova/events/events.html#deviceready
 document.addEventListener('deviceready', onDeviceReady, false);
 
-function onDeviceReady() {
-    // Cordova is now initialized. Have fun!
+        function onDeviceReady() {
+            console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
+            checkLoginState();
+        }
 
-    console.log('Running cordova-' + cordova.platformId + '@' + cordova.version);
-    document.getElementById('deviceready').classList.add('ready');
-}
+        document.addEventListener("DOMContentLoaded", function () {
+            // Also check the login state for web browsers or when Cordova isn't initialized
+            checkLoginState();
 
+            // Attach event to login button
+            document.getElementById('loginBtn').addEventListener('click', function () {
+                // Check if the user is already logged in
+                if (localStorage.getItem("isLoggedIn") === "true") {
+                    // Redirect to record page
+                    window.location.href = "record.html";
+                } else {
+                    // Redirect to login page
+                    window.location.href = "login.html";
+                }
+            });
+        });
+
+        function checkLoginState() {
+            // Automatically redirect if the user is logged in
+            if (localStorage.getItem("isLoggedIn") === "true") {
+                window.location.href = "record.html";
+            }
+        }

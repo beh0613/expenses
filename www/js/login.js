@@ -1,4 +1,10 @@
 $(document).ready(function () {
+    // Check if the user is logged in
+    if (localStorage.getItem("isLoggedIn") === "true") {
+        window.location.href = 'record.html'; // Redirect directly to record page
+        return; // Stop further execution
+    }
+
     // Check if this is a username change request
     const isChangingUsername = new URLSearchParams(window.location.search).get('change') === 'true';
 
@@ -56,6 +62,7 @@ $(document).ready(function () {
 
         // Save current user to localStorage
         localStorage.setItem('currentUser', username);
+        localStorage.setItem('isLoggedIn', "true"); // Mark the user as logged in
 
         // Redirect to main page after short delay
         setTimeout(() => {

@@ -276,6 +276,7 @@ function quickAddIncome() {
         alert("Please complete the calculation by pressing '=' before saving.");
         return;
     }
+
     const amountIncome = parseFloat(document.getElementById('amountIncome').value);
     const remarkIncome = document.getElementById('remarkIncome').value;
 
@@ -291,8 +292,12 @@ function quickAddIncome() {
         return;
     }
 
-    // Use the selected asset or default to 'Cash'
-    const selectedAsset = localStorage.getItem('selectedAsset') || 'Cash';
+    // Validate asset selection
+    const selectedAsset = localStorage.getItem('selectedAsset');
+    if (!selectedAsset) {
+        alert("Please select an asset before saving!");
+        return;
+    }
 
     // Use the selected date or default to today's date in YYYY-MM-DD format
     const incomeDate = document.getElementById('incomeDate').value || new Date().toISOString().split('T')[0];
@@ -339,6 +344,7 @@ function saveIncome() {
         alert("Please complete the calculation by pressing '=' before saving.");
         return;
     }
+
     const amountIncome = parseFloat(document.getElementById('amountIncome').value);
     const remarkIncome = document.getElementById('remarkIncome').value;
 
@@ -354,8 +360,12 @@ function saveIncome() {
         return;
     }
 
-    // Use the selected asset or default to 'Cash'
-    const selectedAsset = localStorage.getItem('selectedAsset') || 'Cash';
+    // Validate asset selection
+    const selectedAsset = localStorage.getItem('selectedAsset');
+    if (!selectedAsset) {
+        alert("Please select an asset before saving!");
+        return;
+    }
 
     // Use the selected date or default to today's date in YYYY-MM-DD format
     const incomeDate = document.getElementById('incomeDate').value || new Date().toISOString().split('T')[0];
@@ -396,8 +406,8 @@ function saveIncome() {
     alert("Income added successfully!");
     resetFields();
     window.location.href = 'record.html'; // Navigate to the records page
-
 }
+
 
 
 // Reset fields after saving or canceling
