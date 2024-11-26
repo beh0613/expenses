@@ -540,7 +540,17 @@ document.addEventListener("DOMContentLoaded", () => {
             "Tool": "./image/iconTool.png",
             "Travel": "./image/iconTravel.png",
             "Vegetable": "./image/iconVegetable.png",
-            "Feed":"./image/iconFeed.png"
+            "Feed": "./image/iconFeed.png",
+            "Beauty": "./image/iconBeauty.png",
+            "FastFood": "./image/iconFastFood.png",
+            "Gift": "./image/iconGift.png",
+            "House": "./image/iconHouse.png",
+            "Insurance": "./image/iconInsurance.png",
+            "Maintainence": "./image/iconMaintainence.png",
+            "Salon": "./image/iconSalon.png",
+            "Shoes": "./image/iconShoes.png",
+            "Social": "./image/iconSocial.png",
+            "Tax":"./image/iconTax.png"
         };
 
         const categoryTotals = {};
